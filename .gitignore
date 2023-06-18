@@ -1,0 +1,12 @@
+# files are too big
+/Artists.csv
+/Artworks.csv
+
+# MacOS
+**/.DS_Store
+
+# pycache
+__pycache__/
+
+# images
+/images
