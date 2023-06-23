@@ -1,6 +1,5 @@
 import holoviews as hv
 import pandas as pd
-from bokeh.plotting import show
 from holoviews import dim, opts
 
 hv.extension("bokeh")
@@ -23,4 +22,5 @@ chord.opts(
     )
 )
 
-show(hv.render(chord))
+# show(hv.render(chord))
+# hv.save(chord, "collabs_plot.html")

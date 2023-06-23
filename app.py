@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 from colour_plot import fig_all as colour_fig_all
 from colour_plot import fig_department as colour_fig_department
@@ -61,3 +62,7 @@ with col6:
 st.divider()
 
 st.header("Spaces")
+
+file = open("collabs_plot.html", "r", encoding="utf-8")
+html = file.read()
+components.html(html, width=800, height=800, scrolling=True)
