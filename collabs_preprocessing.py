@@ -52,6 +52,3 @@ for i in range(num_unique_nationalities):
 
 collab_graph = pd.DataFrame(edges, columns=["source", "target", "value"])
 collab_graph.to_csv("CollabsGraph.csv", index=False)
-
-# https://holoviews.org/reference/elements/bokeh/Chord.html
-# https://discuss.streamlit.io/t/plotting-holoviews-plot/215/10
