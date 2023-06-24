@@ -47,8 +47,13 @@ edges = []
 for i in range(num_unique_nationalities):
     for j in range(num_unique_nationalities):
         if adj_matrix[i][j] != 0:
-            edge = [index_nationality[i], index_nationality[j], adj_matrix[i][j]]
+            edge = [i, j, adj_matrix[i][j]]
             edges.append(edge)
 
-collab_graph = pd.DataFrame(edges, columns=["source", "target", "value"])
-collab_graph.to_csv("CollabsGraph.csv", index=False)
+collab_graph_edges = pd.DataFrame(edges, columns=["source", "target", "value"])
+collab_graph_edges.to_csv("CollabsGraphEdges.csv", index=False)
+
+collab_graph_nodes = pd.DataFrame.from_dict(
+    index_nationality, orient="index", columns=["nationality"]
+).reset_index()
+collab_graph_nodes.to_csv("CollabsGraphNodes.csv", index=False)
