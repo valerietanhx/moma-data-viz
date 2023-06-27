@@ -20,6 +20,11 @@ logging.basicConfig(
 
 IMAGE_FOLDER = "images"
 CURR_FILEPATH = os.path.dirname(__file__)
+# i know relative path is a thing!!!
+# but it doesn't work with "run python file in terminal" in vscode
+# bc it runs from moma-data-viz, not this subfolder :O
+# :"D maybe i should start running my code differently? this is q messy
+# to be continued.......
 
 
 async def download_image(image_id, session, url):
