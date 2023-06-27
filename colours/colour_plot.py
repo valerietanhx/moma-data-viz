@@ -1,9 +1,14 @@
+import os
+
 import pandas as pd
 import plotly.express as px
 
+CURR_FILEPATH = os.path.dirname(__file__)
+
 
 def get_frequencies_of_basic_colour_groups():
-    basic_palettes = pd.read_csv("BasicPalettes.csv")
+    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
+    basic_palettes = pd.read_csv(basic_palettes_path)
     basic_colour_groups = basic_palettes["BasicPalette"].values.tolist()
     combined = [colour for group in basic_colour_groups for colour in eval(group)]
     unique_colours = set(combined)
@@ -45,8 +50,10 @@ fig_all.update_layout(showlegend=False)
 
 
 def get_frequencies_of_basic_colour_groups_by_department():
-    basic_palettes = pd.read_csv("BasicPalettes.csv")
-    artworks_with_thumbnails = pd.read_csv("ArtworksWithThumbnails.csv")
+    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
+    basic_palettes = pd.read_csv(basic_palettes_path)
+    thumbnails_path = os.path.join(CURR_FILEPATH, "ArtworksWithThumbnails.csv")
+    artworks_with_thumbnails = pd.read_csv(thumbnails_path)
     merged = basic_palettes.merge(artworks_with_thumbnails, on="ObjectID")
     df_as_list = []
     for department in list(merged["Department"].unique()):
@@ -74,4 +81,4 @@ fig_department = px.histogram(
 )  # TODO: fix hover text + standardise order of colours
 fig_department.update_layout(yaxis_title="Percentage")
 fig_department.update_layout(showlegend=False)
-fig_department.update_layout(yaxis_ticksuffix = "%")
+fig_department.update_layout(yaxis_ticksuffix="%")

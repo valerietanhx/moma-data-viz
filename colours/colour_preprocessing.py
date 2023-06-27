@@ -5,32 +5,40 @@ from os import listdir
 
 import aiohttp
 import pandas as pd
+from basic_colour_group_mappings import BASIC_COLOUR_GROUP_MAPPINGS
 from colorthief import ColorThief
 from scipy.spatial import KDTree
 from webcolors import CSS3_HEX_TO_NAMES, hex_to_rgb
-
-from basic_colour_group_mappings import BASIC_COLOUR_GROUP_MAPPINGS
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
 )
 
-# TODO: split into different files?
+# TODO: clean up?
+# currently a bit messy with the commented-out function calls scattered throughout
+
+IMAGE_FOLDER = "images"
+CURR_FILEPATH = os.path.dirname(__file__)
 
 
 async def download_image(image_id, session, url):
     try:
         async with session.get(url) as response:
             content = b"".join([line async for line in response.content.iter_any()])
-            with open(f"images/{image_id}.jpg", "wb") as file:
+            image_path = os.path.join(CURR_FILEPATH, f"{IMAGE_FOLDER}/{image_id}.jpg")
+            with open(image_path, "wb") as file:
                 file.write(content)
-    except Exception:
+    except Exception as err:
+        logging.info(err)
         logging.info(f"Image {image_id} failed to download")
 
 
 async def download_all_images(id_urls, loop):
     timeout = aiohttp.ClientTimeout(total=None)  # disable timeout check
+    folder_path = os.path.join(CURR_FILEPATH, IMAGE_FOLDER)
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
     async with aiohttp.ClientSession(loop=loop, timeout=timeout) as session:
         logging.info("Started downloading images")
         await asyncio.gather(
@@ -39,9 +47,11 @@ async def download_all_images(id_urls, loop):
 
 
 async def main_download_all_images():
-    artworks = pd.read_csv("Artworks.csv")
+    artworks_path = os.path.join(CURR_FILEPATH, "../Artworks.csv")
+    artworks = pd.read_csv(artworks_path)
     artworks.dropna(subset=["ThumbnailURL"], inplace=True)
-    # artworks.to_csv("ArtworksWithThumbnails.csv", index=False)
+    # thumbnails_csv_path = os.path.join(CURR_FILEPATH, "ArtworksWithThumbnails.csv")
+    # artworks.to_csv(thumbnails_csv_path, index=False)
     id_urls = artworks.filter(["ObjectID", "ThumbnailURL"], axis=1).values.tolist()
     loop = asyncio.get_event_loop()
     await download_all_images(id_urls, loop)
@@ -67,7 +77,8 @@ def convert_rgb_to_names(rgb_tuple):
 
 
 def create_colorthief(image):
-    return ColorThief(f"images/{image}")
+    image_path = os.path.join(CURR_FILEPATH, f"{IMAGE_FOLDER}/{image}")
+    return ColorThief(image_path)
 
 
 async def get_image_colour_palette(image):
@@ -81,7 +92,11 @@ async def get_image_colour_palette(image):
 
 # slow even with async bc file i/o is a blocking operation
 async def main_get_all_images_six_colour_palette(start, end):
-    images = listdir("images")
+    images_path = os.path.join(
+        CURR_FILEPATH,
+        "images",
+    )
+    images = listdir(images_path)
     try:
         images.remove(".DS_Store")
     except ValueError:
@@ -103,7 +118,8 @@ def get_palettes_in_batches():
     while start < 83349:  # total number of images
         logging.info(f"Batch {counter} in progress")
         df = asyncio.run(main_get_all_images_six_colour_palette(start, end))
-        df.to_csv(f"Palettes_batch{counter}.csv", index=False)
+        palettes_path = os.path.join(CURR_FILEPATH, f"Palettes_batch{counter}.csv")
+        df.to_csv(palettes_path, index=False)
         start, end = end, end + 2000
         counter += 1
 
@@ -115,12 +131,13 @@ def get_palettes_in_batches():
 def combine_palettes():
     palettes_list = []
     for i in range(1, 43):  # batches 1 to 42
-        fname = f"Palettes_batch{i}.csv"
-        palette = pd.read_csv(fname)
+        palette_batch_path = os.path.join(CURR_FILEPATH, f"Palettes_batch{i}.csv")
+        palette = pd.read_csv(palette_batch_path)
         palettes_list.append(palette)
-        os.remove(fname)  # remove batch
+        os.remove(palette_batch_path)  # remove batch
     palettes = pd.concat(palettes_list)
-    palettes.to_csv("Palettes.csv", index=False)
+    palettes_path = os.path.join(CURR_FILEPATH, "Palettes.csv")
+    palettes.to_csv(palettes_path, index=False)
 
 
 # combine_palettes()
@@ -135,23 +152,28 @@ def convert_css_palette(css_set):
 
 
 def convert_all_css_palettes():
-    palettes = pd.read_csv("Palettes.csv")
+    palettes_path = os.path.join(CURR_FILEPATH, "Palettes.csv")
+    palettes = pd.read_csv(palettes_path)
     palettes["BasicPalette"] = palettes["NamePalette"].apply(
         lambda x: convert_css_palette(eval(x))
     )
-    palettes.to_csv("BasicPalettes.csv", index=False)
+    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
+    palettes.to_csv(basic_palettes_path, index=False)
 
 
 # convert_all_css_palettes()
 
 
 def artworks_no_grey():
-    basic_palettes = pd.read_csv("BasicPalettes.csv")
-    artworks_with_thumbnails = pd.read_csv("ArtworksWithThumbnails.csv")
+    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
+    basic_palettes = pd.read_csv(basic_palettes_path)
+    thumbnails_csv_path = os.path.join(CURR_FILEPATH, "ArtworksWithThumbnails.csv")
+    artworks_with_thumbnails = pd.read_csv(thumbnails_csv_path)
     merged = basic_palettes.merge(artworks_with_thumbnails, on="ObjectID")
     artworks_without_grey = merged.query("~`BasicPalette`.str.contains('grey')")
     return artworks_without_grey
 
 
-artworks_without_grey = artworks_no_grey()
-# artworks_without_grey.to_csv("ArtworksWithoutGrey.csv", index=False)
+# artworks_without_grey = artworks_no_grey()
+# no_grey_path = os.path.join(CURR_FILEPATH, "ArtworksWithoutGrey.csv")
+# artworks_without_grey.to_csv(no_grey_path, index=False)

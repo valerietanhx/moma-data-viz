@@ -1,5 +1,6 @@
 import holoviews as hv
 import pandas as pd
+import os
 
 # from bokeh.plotting import show
 from holoviews import dim, opts
@@ -7,8 +8,13 @@ from holoviews import dim, opts
 hv.extension("bokeh")
 hv.output(size=200)
 
-edges = pd.read_csv("CollabsGraphEdges.csv")
-nodes = pd.read_csv("CollabsGraphNodes.csv")
+CURR_FILEPATH = os.path.dirname(__file__)
+
+collabs_graph_edges_path = os.path.join(CURR_FILEPATH, "CollabsGraphEdges.csv")
+edges = pd.read_csv(collabs_graph_edges_path)
+
+collabs_graph_nodes_path = os.path.join(CURR_FILEPATH, "CollabsGraphNodes.csv")
+nodes = pd.read_csv(collabs_graph_nodes_path)
 nodes = hv.Dataset(nodes, "index")
 
 # currently the most basic of chord diagrams with code from holoview tutorial
@@ -27,4 +33,6 @@ chord.opts(
 )
 
 # show(hv.render(chord))
-# hv.save(chord, "collabs_plot.html")
+# collabs_plot_path = os.path.join(CURR_FILEPATH, "collabs_plot.html")
+
+# hv.save(chord, collabs_plot_path)

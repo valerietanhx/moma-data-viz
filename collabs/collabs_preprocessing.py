@@ -1,6 +1,11 @@
+import os
+
 import pandas as pd
 
-artworks = pd.read_csv("Artworks.csv")
+CURR_FILEPATH = os.path.dirname(__file__)
+
+artworks_path = os.path.join(CURR_FILEPATH, "../Artworks.csv")
+artworks = pd.read_csv(artworks_path)
 collabs = artworks[artworks["ConstituentID"].str.contains(", ", na=False)]
 
 # cleaning that needs to be inserted here?
@@ -50,10 +55,12 @@ for i in range(num_unique_nationalities):
             edge = [i, j, adj_matrix[i][j]]
             edges.append(edge)
 
-collab_graph_edges = pd.DataFrame(edges, columns=["source", "target", "value"])
-collab_graph_edges.to_csv("CollabsGraphEdges.csv", index=False)
+collabs_graph_edges = pd.DataFrame(edges, columns=["source", "target", "value"])
+collabs_graph_edges_path = os.path.join(CURR_FILEPATH, "CollabsGraphEdges.csv")
+collabs_graph_edges.to_csv(collabs_graph_edges_path, index=False)
 
-collab_graph_nodes = pd.DataFrame.from_dict(
+collabs_graph_nodes = pd.DataFrame.from_dict(
     index_nationality, orient="index", columns=["nationality"]
 ).reset_index()
-collab_graph_nodes.to_csv("CollabsGraphNodes.csv", index=False)
+collabs_graph_nodes_path = os.path.join(CURR_FILEPATH, "CollabsGraphNodes.csv")
+collabs_graph_nodes.to_csv(collabs_graph_nodes_path, index=False)
