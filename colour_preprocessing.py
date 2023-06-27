@@ -49,6 +49,9 @@ async def main_download_all_images():
 
 # asyncio.run(main_download_all_images())
 
+
+# credits:
+# https://medium.com/codex/rgb-to-color-names-in-python-the-robust-way-ec4a9d97a01f
 css3_db = CSS3_HEX_TO_NAMES
 rgb_values = []
 NAMES = []

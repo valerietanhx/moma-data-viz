@@ -21,6 +21,26 @@ with tab1:
 with tab2:
     st.plotly_chart(colour_fig_department)
 
+with st.expander("Methodology"):
+    st.markdown(
+        """
+        - [aiohttp](https://docs.aiohttp.org/en/stable/) was used to download all
+        thumbnail images available.
+        - For each image, we retrieved an RGB colour palette of the six most dominant
+        colours in it with the [ColorThief](https://github.com/fengsp/color-thief-py)
+        module, before converting each hex code to the name of the closest named CSS
+        colour with the [webcolors](https://pypi.org/project/webcolors/) module.
+        - We then mapped each CSS colour name to one of ten basic colour names:
+        red, orange, yellow, green, blue, purple, pink, brown, grey, and white.
+        The mapping was inspired by
+        [w3school](https://www.w3schools.com/colors/colors_groups.asp) and
+        [Austin Gil](https://austingil.com/css-named-colors/)'s mappings,
+        but modified slightly by us based on our own perception of the colours.
+        - Plotly was used to generate the charts above based on the frequency
+        of each of the basic colour names across the images.
+        """
+    )
+
 st.write(
     """
     Most of the 83349 artworks (82301 of them, in fact—that's around 98.7%!) 
