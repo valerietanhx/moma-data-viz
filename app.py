@@ -47,7 +47,7 @@ with st.expander("Methodology"):
 st.write(
     """
     Most of the 83349 artworks (82301 of them, in fact—that's around 98.7%!) 
-    have grey as a dominant colour. Here are some that don't!
+    have grey as one of their dominant colours. Here are some that don't!
     """
 )
 
@@ -86,6 +86,13 @@ with col5:
 with col6:
     show_random_image_without_grey(5)
 
+st.write(
+    """
+    (Some of these artworks may still look like they have black or grey in them.
+    Colour detection isn't quite perfect yet, it seems :"))
+    """
+)
+
 st.divider()
 
 st.header("Spaces")
@@ -108,14 +115,13 @@ with st.expander("Methodology"):
         This means that an artwork by artists A1, A2, and B1, where artists A1 and A2
         are from country A and artist B1 is from country B, only counts as one
         collaboration between countries A and B, not two.
-        - [holoviews](https://holoviews.org/reference/elements/bokeh/Chord.html)
-        was used to create the chord diagram above.
+        - HoloViews was used to create the chord diagram above.
         """
     )
 
 st.write(
     """
-    Want a more granular look? Pick two nationalities and discover
+    Want a more granular view? Pick two nationalities and discover
     art born from the collaboration of their artists!
     """
 )
@@ -162,8 +168,8 @@ else:
     if len(matches_with_thumbnails) == 0:
         st.write(
             f"""
-            {first_nationality} and {second_nationality} artists have collaborated,
-            but we don't have images for their works!
+            {first_nationality} and {second_nationality} artists have collaborated
+            {len(matches)} time(s), but we don't have images for their works!
             Here are some of their artwork titles instead:
             """
         )
@@ -190,8 +196,9 @@ else:
     else:
         st.write(
             f"""
-            Here's a random artwork born from a collaboration between
-            {first_nationality} and {second_nationality} artists!
+            {first_nationality} and {second_nationality} artists have collaborated
+            {len(matches)} time(s)!
+            Here's a random artwork born from one of their collaborations:
             """
         )
         random_artwork = matches_with_thumbnails.sample()
