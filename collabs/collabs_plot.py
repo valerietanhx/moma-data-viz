@@ -3,7 +3,7 @@ import os
 import holoviews as hv
 import pandas as pd
 
-# from bokeh.plotting import show
+from bokeh.plotting import show
 from holoviews import dim, opts
 
 hv.extension("bokeh")
@@ -33,8 +33,7 @@ chord.opts(
     )
 )
 
-# show(hv.render(chord))
-# collabs_plot_path = os.path.join(CURR_FILEPATH, "collabs_plot.html")
+show(hv.render(chord))
+collabs_plot_path = os.path.join(CURR_FILEPATH, "collabs_plot.html")
 
-# hv.save(chord, collabs_plot_path)
-# hv.save(chord, collabs_plot_path)
+hv.save(chord, collabs_plot_path)

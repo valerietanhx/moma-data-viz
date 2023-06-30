@@ -34,12 +34,8 @@ index_nationality = dict(enumerate(unique_nationalities))
 nationality_index = {nat: idx for idx, nat in enumerate(unique_nationalities)}
 
 # populate adjacency matrix
-# NOTE: add logic for duplicate nationalities if necessary
-# are we counting a collab as between people? or between nationalities?
-# so e.g. we have A1, A2, B1, where A and B are countries
-# are the collaborations A1-A2, A2-A1, A1-B1, A2-B1,
-# or just A-B?
 for group in collab_nationalities:
+    group = list(set(group))
     for i in range(len(group) - 1):
         artist_1_index = nationality_index[group[i]]
         for j in range(i + 1, len(group)):
