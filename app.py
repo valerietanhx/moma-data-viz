@@ -14,6 +14,8 @@ st.title("The Sights and Spaces of MoMa")
 
 st.header("Sights")
 
+st.subheader("Colours")
+
 st.write("Let's explore the colours of the artworks in MoMa's art collection.")
 
 tab1, tab2 = st.tabs(["All artworks", "By department"])
@@ -52,6 +54,7 @@ st.write(
 artworks_without_grey = pd.read_csv("colours/ArtworksWithoutGrey.csv")
 random_six = artworks_without_grey.sample(6)
 
+
 def show_random_image_without_grey(idx):
     row = random_six.iloc[idx]
     object_id = int(row["ObjectID"])
@@ -59,6 +62,7 @@ def show_random_image_without_grey(idx):
     artists = row["Artist"]
     st.image(f"colours/images/{object_id}.jpg")
     st.caption(f"_{title}_ by {artists}")
+
 
 col1, col2, col3 = st.columns(3)
 
@@ -85,6 +89,8 @@ with col6:
 st.divider()
 
 st.header("Spaces")
+
+st.subheader("International collaborations")
 
 st.write("What international collaborations are there in MoMa's art collection?")
 
