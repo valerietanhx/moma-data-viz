@@ -45,40 +45,42 @@ with st.expander("Methodology"):
 st.write(
     """
     Most of the 83349 artworks (82301 of them, in fact—that's around 98.7%!) 
-    have grey as a dominant colour. Here are some of the ones that don't.
+    have grey as a dominant colour. Here are some that don't!
     """
 )
+
+artworks_without_grey = pd.read_csv("colours/ArtworksWithoutGrey.csv")
+random_six = artworks_without_grey.sample(6)
+
+def show_random_image_without_grey(idx):
+    row = random_six.iloc[idx]
+    object_id = int(row["ObjectID"])
+    title = row["Title"]
+    artists = row["Artist"]
+    st.image(f"colours/images/{object_id}.jpg")
+    st.caption(f"_{title}_ by {artists}")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.image("colours/images/207.jpg")
-    st.caption(
-        "_Arch Oboler Guest House (Eleanor's Retreat), project,"
-        + " Malibu, California, Perspective_ by Frank Lloyd Wight"
-    )
+    show_random_image_without_grey(0)
 
 with col2:
-    st.image("colours/images/8168.jpg")
-    st.caption("_Otis Rush_ by Victor Moscoso, Raoul Ubac")
+    show_random_image_without_grey(1)
 
 with col3:
-    st.image("colours/images/32764.jpg")
-    st.caption("_Untitled from Moonstrips Empire News_ by Eduardo Paolozzi")
+    show_random_image_without_grey(2)
 
 col4, col5, col6 = st.columns(3)
 
 with col4:
-    st.image("colours/images/119718.jpg")
-    st.caption("_Lips_ by Louise Bourgeois")
+    show_random_image_without_grey(3)
 
 with col5:
-    st.image("colours/images/431484.jpg")
-    st.caption("_You're an Indian?_ by Kay WalkingStick")
+    show_random_image_without_grey(4)
 
 with col6:
-    st.image("colours/images/432544.jpg")
-    st.caption("_Kusama_ by James Welling")
+    show_random_image_without_grey(5)
 
 st.divider()
 
@@ -88,7 +90,7 @@ st.write("What international collaborations are there in MoMa's art collection?"
 
 file = open("collabs/collabs_plot.html", "r", encoding="utf-8")
 html = file.read()
-components.html(html, width=800, height=800, scrolling=True)
+components.html(html, width=800, height=600, scrolling=True)
 
 with st.expander("Methodology"):
     st.markdown(
@@ -108,7 +110,7 @@ with st.expander("Methodology"):
 st.write(
     """
     Want a more granular look? Pick two nationalities and discover
-    a random artwork born from the collaboration of their artists!
+    art born from the collaboration of their artists!
     """
 )
 
@@ -190,5 +192,6 @@ else:
         object_id = int(random_artwork["ObjectID"].tolist()[0])
         title = random_artwork["Title"].tolist()[0]
         artists = random_artwork["Artist"].tolist()[0]
-        st.image(f"colours/images/{object_id}.jpg")
-        st.caption(f"_{title}_ by {artists}")
+        with st.columns(3)[1]:
+            st.image(f"colours/images/{object_id}.jpg")
+            st.caption(f"_{title}_ by {artists}")
