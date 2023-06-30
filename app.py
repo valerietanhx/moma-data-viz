@@ -1,3 +1,4 @@
+import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -36,7 +37,7 @@ with st.expander("Methodology"):
         [w3school](https://www.w3schools.com/colors/colors_groups.asp) and
         [Austin Gil](https://austingil.com/css-named-colors/)'s mappings,
         but modified slightly by us based on our own perception of the colours.
-        - Plotly was used to generate the charts above based on the frequency
+        - Plotly was used to create the charts above based on the frequency
         of each of the basic colour names across the images.
         """
     )
@@ -83,6 +84,111 @@ st.divider()
 
 st.header("Spaces")
 
+st.write("What international collaborations are there in MoMa's art collection?")
+
 file = open("collabs/collabs_plot.html", "r", encoding="utf-8")
 html = file.read()
 components.html(html, width=800, height=800, scrolling=True)
+
+with st.expander("Methodology"):
+    st.markdown(
+        """
+        - We kept the artworks attributed to at least two artists from different
+        nationalities (i.e. intra-national collaborations were excluded).
+        - A collaboration between two nationalities refers to an artwork where at least
+        one artist of each nationality contributed to the artwork.
+        This means that an artwork by artists A1, A2, and B1, where artists A1 and A2
+        are from country A and artist B1 is from country B, only counts as one
+        collaboration between countries A and B, not two.
+        - [holoviews](https://holoviews.org/reference/elements/bokeh/Chord.html)
+        was used to create the chord diagram above.
+        """
+    )
+
+st.write(
+    """
+    Want a more granular look? Pick two nationalities and discover
+    a random artwork born from the collaboration of their artists!
+    """
+)
+
+nodes = pd.read_csv("collabs/CollabsGraphNodes.csv")
+nationalities = nodes["nationality"]
+
+# pick first nationality
+first_nationality = st.selectbox("First nationality", nationalities)
+
+# get nationalities that selected nationality has collaborated with
+first_nationality_index = nodes.query(f"`nationality` == '{first_nationality}'")[
+    "index"
+].tolist()[0]
+edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
+collab_nationalities = edges.query(f"`source` == {first_nationality_index}")
+collab_nationalities = collab_nationalities.merge(
+    nodes, how="left", left_on="target", right_on="index"
+)
+
+# pick second nationality out of the filtered nationalities
+second_nationality = st.selectbox(
+    "Second nationality", collab_nationalities["nationality"]
+)
+
+# find matches
+collabs = pd.read_csv("collabs/Collabs.csv")
+matches = collabs.query(
+    f"`Nationality`.str.contains('{first_nationality}') &"
+    + f"`Nationality`.str.contains('{second_nationality}')"
+)
+
+# don't think this should appear given the way streamlit options work?
+# but leaving here for now in case
+if len(matches) == 0:
+    st.info(
+        f"""
+        Sorry, we don't know of any collaborations between
+        {first_nationality} and {second_nationality} artists :(
+        """
+    )
+else:
+    matches_with_thumbnails = matches.dropna(subset=["ThumbnailURL"])
+    if len(matches_with_thumbnails) == 0:
+        st.write(
+            f"""
+            {first_nationality} and {second_nationality} artists have collaborated,
+            but we don't have images for their works!
+            Here are some of their artwork titles instead:
+            """
+        )
+        filtered = matches.filter(["Title", "Artist", "Nationality"], axis=1)
+        filtered = filtered.rename(
+            {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
+        )
+
+        # css to hide row indices of table
+        hide_table_row_index = """
+            <style>
+            thead tr th:first-child {display:none}
+            tbody th {display:none}
+            </style>
+            """
+        # inject css with markdown
+        st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
+        # display dataframe
+        if len(filtered) <= 5:
+            st.table(filtered)
+        else:
+            st.table(filtered.sample(5))
+    else:
+        st.write(
+            f"""
+            Here's a random artwork born from a collaboration between
+            {first_nationality} and {second_nationality} artists!
+            """
+        )
+        random_artwork = matches_with_thumbnails.sample()
+        object_id = int(random_artwork["ObjectID"].tolist()[0])
+        title = random_artwork["Title"].tolist()[0]
+        artists = random_artwork["Artist"].tolist()[0]
+        st.image(f"colours/images/{object_id}.jpg")
+        st.caption(f"_{title}_ by {artists}")

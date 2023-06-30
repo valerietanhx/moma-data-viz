@@ -8,6 +8,9 @@ artworks_path = os.path.join(CURR_FILEPATH, "../Artworks.csv")
 artworks = pd.read_csv(artworks_path)
 collabs = artworks[artworks["ConstituentID"].str.contains(", ", na=False)]
 
+collabs_path = os.path.join(CURR_FILEPATH, "Collabs.csv")
+collabs.to_csv(collabs_path, index=False)
+
 # cleaning that needs to be inserted here?
 # don't consider it multiple collabs if it's the same work, just different parts.
 # e.g. different paintings that together form one work.
