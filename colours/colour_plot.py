@@ -22,17 +22,18 @@ df_all.reset_index(inplace=True)
 df_all.columns = ["Colour", "Frequency"]
 df_all["Colour"] = df_all["Colour"].str.capitalize()
 
+# https://coolors.co/e2e2df-babab5-d0b19f-f0ba93-f6dea2-a0cfc5-9cc7e7-bba1e3-e89bc7-f39197
 colours = {
-    "Red": "indianred",
-    "Orange": "coral",
-    "Yellow": "lemonchiffon",
-    "Green": "darkseagreen",
-    "Blue": "lightblue",
-    "Purple": "thistle",
-    "Pink": "lightpink",
-    "Brown": "sienna",
-    "Grey": "grey",
-    "White": "whitesmoke",
+    "Red": "#F39097",
+    "Orange": "#F0BA93",
+    "Yellow": "#F6DEA2",
+    "Green": "#A0CFC5",
+    "Blue": "#9CC6E7",
+    "Purple": "#BBA1E3",
+    "Pink": "#E89BC6",
+    "Brown": "#D0B19F",
+    "Grey": "#BABAB5",
+    "White": "#E2E2DF",
 }
 
 fig_all = px.bar(

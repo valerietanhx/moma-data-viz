@@ -24,6 +24,8 @@ collab_nationalities = list(  # removing empty strings / unknown nationalities
     )
 )
 
+collab_nationalities = list(filter(lambda x: len(x) > 1, collab_nationalities))
+
 unique_nationalities = sorted(
     {art_nat for group in collab_nationalities for art_nat in group}
 )
@@ -38,13 +40,12 @@ nationality_index = {nat: idx for idx, nat in enumerate(unique_nationalities)}
 
 # populate adjacency matrix
 for group in collab_nationalities:
-    group = list(set(group))
+    group = sorted(list(set(group)))
     for i in range(len(group) - 1):
         artist_1_index = nationality_index[group[i]]
         for j in range(i + 1, len(group)):
             artist_2_index = nationality_index[group[j]]
             adj_matrix[artist_1_index][artist_2_index] += 1
-            adj_matrix[artist_2_index][artist_1_index] += 1
 
 # get into source | dest | count format
 edges = []
