@@ -34,6 +34,7 @@ async def download_image(image_id, session, url):
             image_path = os.path.join(CURR_FILEPATH, f"{IMAGE_FOLDER}/{image_id}.jpg")
             with open(image_path, "wb") as file:
                 file.write(content)
+                logging.info(f"Downloading {image_id}")
     except Exception as err:
         logging.info(err)
         logging.info(f"Image {image_id} failed to download")
@@ -62,7 +63,7 @@ async def main_download_all_images():
     await download_all_images(id_urls, loop)
 
 
-# asyncio.run(main_download_all_images())
+asyncio.run(main_download_all_images())
 
 
 # credits:
