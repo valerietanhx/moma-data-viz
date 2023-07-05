@@ -14,10 +14,10 @@ newmodel = torch.nn.Sequential(OrderedDict([*(list(model.named_children())[:-1])
 # Remove fully connected layer
 newmodel.eval()
 
-dataset = CustomImageFolder('./colours/images/')
+dataset = CustomImageFolder('./colours/images/', './Artworks.csv')
 dataloader = DataLoader(dataset, batch_size=64, shuffle=True)
 
-features = next(iter(dataloader))
+features, labels = next(iter(dataloader))
 img = features
 plt.imshow(np.moveaxis(img[0].cpu().detach().numpy(), 0, -1) )
 plt.show()
