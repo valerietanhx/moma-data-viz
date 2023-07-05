@@ -22,12 +22,12 @@ class CustomImageFolder(Dataset):
         #t = transforms.ToPILImage()
         img = (read_image(self.root_dir + "/" + self.data[idx]))
         
-        img =transforms.ToPILImage()(img)
-        
+        img = transforms.ToPILImage()(img)
+ 
         if self.transform:
             img = self.transform(img)
 
-        return img, "dummy" # No label
+        return img # No label
     
     
     

@@ -17,7 +17,7 @@ newmodel.eval()
 dataset = CustomImageFolder('./colours/images/')
 dataloader = DataLoader(dataset, batch_size=64, shuffle=True)
 
-features, labels = next(iter(dataloader))
+features = next(iter(dataloader))
 img = features
 plt.imshow(np.moveaxis(img[0].cpu().detach().numpy(), 0, -1) )
 plt.show()
