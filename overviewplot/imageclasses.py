@@ -6,13 +6,14 @@ import numpy as np
 import torchvision
 from torch.utils.data import Dataset
 from torchvision import transforms, models, datasets
-from torchvision.io import read_image
+from torchvision.io import read_image, ImageReadMode
 from PIL import Image
 
 class CustomImageFolder(Dataset):
-    OPTIMAL_SIZE = (224, 224)
+    OPTIMAL_SIZE = [224, 224]
     TF = transforms.Compose(
-        [transforms.Resize(OPTIMAL_SIZE, antialias=True), transforms.ToTensor()])
+        [transforms.Resize(OPTIMAL_SIZE, antialias=True),
+        transforms.ToTensor()])
     def __init__(self, img_dir, csv_dir, transform=TF):
         df = pd.read_csv(csv_dir)
         self.csv = df[~df["Classification"].isnull()]
@@ -27,7 +28,7 @@ class CustomImageFolder(Dataset):
     def __getitem__(self, idx):
         img_link = self.data[idx]
         img_id = int(img_link.split(".")[0])
-        img = (read_image(self.img_dir + "/" + img_link))
+        img = (read_image(self.img_dir + "/" + img_link, ImageReadMode.RGB))
         img = transforms.ToPILImage()(img)
         if self.transform:
             img = self.transform(img)
