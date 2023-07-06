@@ -33,7 +33,9 @@ num_unique_nationalities = len(unique_nationalities)
 
 # adjacency matrix
 row = [0] * num_unique_nationalities
-adj_matrix = [row.copy() for _ in range(num_unique_nationalities)]
+adj_matrix_plotting = [row.copy() for _ in range(num_unique_nationalities)]
+
+adj_matrix_selection = [row.copy() for _ in range(num_unique_nationalities)]
 
 index_nationality = dict(enumerate(unique_nationalities))
 nationality_index = {nat: idx for idx, nat in enumerate(unique_nationalities)}
@@ -45,19 +47,33 @@ for group in collab_nationalities:
         artist_1_index = nationality_index[group[i]]
         for j in range(i + 1, len(group)):
             artist_2_index = nationality_index[group[j]]
-            adj_matrix[artist_1_index][artist_2_index] += 1
+            adj_matrix_plotting[artist_1_index][artist_2_index] += 1
+            adj_matrix_selection[artist_1_index][artist_2_index] += 1
+            adj_matrix_selection[artist_2_index][artist_1_index] += 1
 
 # get into source | dest | count format
-edges = []
+edges_plotting = []  # used to plot chord diagram
+edges_selection = []  # used for selection of two nationalities
 for i in range(num_unique_nationalities):
     for j in range(num_unique_nationalities):
-        if adj_matrix[i][j] != 0:
-            edge = [i, j, adj_matrix[i][j]]
-            edges.append(edge)
+        if adj_matrix_plotting[i][j] != 0:
+            edge = [i, j, adj_matrix_plotting[i][j]]
+            edges_plotting.append(edge)
+        if adj_matrix_selection[i][j] != 0:
+            edge = [i, j, adj_matrix_selection[i][j]]
+            edges_selection.append(edge)
 
-collabs_graph_edges = pd.DataFrame(edges, columns=["source", "target", "value"])
+collabs_graph_edges = pd.DataFrame(
+    edges_plotting, columns=["source", "target", "value"]
+)
 collabs_graph_edges_path = os.path.join(CURR_FILEPATH, "CollabsGraphEdges.csv")
 collabs_graph_edges.to_csv(collabs_graph_edges_path, index=False)
+
+collabs_selection_edges = pd.DataFrame(
+    edges_selection, columns=["source", "target", "value"]
+)
+collabs_selection_edges_path = os.path.join(CURR_FILEPATH, "CollabsSelectionEdges.csv")
+collabs_selection_edges.to_csv(collabs_selection_edges_path, index=False)
 
 collabs_graph_nodes = pd.DataFrame.from_dict(
     index_nationality, orient="index", columns=["nationality"]
