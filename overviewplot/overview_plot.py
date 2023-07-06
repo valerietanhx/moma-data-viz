@@ -48,8 +48,8 @@ def run():
             list_labels.extend(labels)
             logging.debug(f"Batch {i+1} Done")
             print(f"Batch {i+1} Done")
-            
-           
+
+          
     CONSTANTNUM = 1000
     df = dataset.csv
     class_frequencies = list(map(lambda x: df[df["Classification"] == x].shape[0], df["Classification"].unique()))
@@ -75,7 +75,8 @@ def run():
     dataframe['class'] = y
     dataframe['id'] = id_arr
     fig = px.scatter_3d(dataframe, x="x1", y="x2", z="x3", color='class', custom_data=['id'])
-    fig.update_traces(hovertemplate='<b>Moma</b>: %{customdata}<br>(%{x}, %{y}, %{z})')
+    fig.update_traces(hovertemplate='<b>Moma</b>:<br>%{customdata}<br>(%{x}, %{y}, %{z})')
+    
     fig.write_json("./overviewplot/overviewplot.json")
     fig.show()
     clear_memory()
