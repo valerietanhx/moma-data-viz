@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
+from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
 from colours.colour_plot import fig_all as colour_fig_all
 from colours.colour_plot import fig_department as colour_fig_department
 from overview.read_plot import overview_plot
@@ -92,7 +93,7 @@ with col6:
 st.write(
     """
     (Some of these artworks may still look like they have black or grey in them.
-    Colour detection isn't quite perfect yet, it seems :"))
+    Our colour detection method isn't quite perfect yet, it seems :"))
     """
 )
 
@@ -119,6 +120,31 @@ with st.expander("Methodology"):
         are from country A and artist B1 is from country B, only counts as one
         collaboration between countries A and B, not two.
         - HoloViews was used to create the chord diagram above.
+        - Only collaborations between two nationalities that occurred at least 18 times
+        were plotted to strike a balance between engagement and clarity.
+        """
+    )
+
+st.write(
+    """
+    Only 49 out of 481 collaborations between nationalities—just over 10%—occurred >=18
+    times! While many international collaborations appear in MoMa's collection,
+    most of them seem to have been short-lived partnerships.
+    
+    (Though we are, of course, merely looking at nationalities and not individuals;
+    we cannot conclude that this observation reflects nations' bilateral ties.)
+    """
+)
+
+st.plotly_chart(collabs_fig_cdf)
+
+with st.expander("Methodology"):
+    st.markdown(  # might be unclear, to rework
+        """
+        - We calculated the percentile of each unique frequency value x in descending
+        order. This would correspond to the percentage of collaborations that occurred
+        at least x times.
+        - Plotly was used to plot the line graph above.
         """
     )
 
