@@ -105,7 +105,7 @@ st.subheader("International collaborations")
 
 st.write("What international collaborations are there in MoMa's art collection?")
 
-file = open("collabs/collabs_plot.html", "r", encoding="utf-8")
+file = open("collabs/collabs_chord_plot.html", "r", encoding="utf-8")
 html = file.read()
 components.html(html, width=800, height=600, scrolling=True)
 

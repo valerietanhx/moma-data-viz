@@ -62,4 +62,8 @@ chord.opts(
 )
 
 
+<<<<<<< HEAD
 # show(hv.render(chord))
+=======
+show(hv.render(chord))  # automatically saves collabs_chord_plot.html in same directory
+>>>>>>> a4ec229 (Fix error with chord diagram html file)
