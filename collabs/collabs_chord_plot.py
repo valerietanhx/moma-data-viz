@@ -69,4 +69,4 @@ chord.opts(
 )
 
 
-show(hv.render(chord))  # automatically saves collabs_plot.html in same directory
+show(hv.render(chord))  # automatically saves collabs_chord_plot.html in same directory
