@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
@@ -136,8 +138,8 @@ first_nationality = st.selectbox("First nationality", nationalities)
 first_nationality_index = nodes.query(f"`nationality` == '{first_nationality}'")[
     "index"
 ].tolist()[0]
-edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
-collab_nationalities = edges.query(f"`source` == {first_nationality_index}")
+edges_selection = pd.read_csv("collabs/CollabsSelectionEdges.csv")
+collab_nationalities = edges_selection.query(f"`source` == {first_nationality_index}")
 collab_nationalities = collab_nationalities.merge(
     nodes, how="left", left_on="target", right_on="index"
 )
@@ -176,6 +178,12 @@ else:
         filtered = matches.filter(["Title", "Artist", "Nationality"], axis=1)
         filtered = filtered.rename(
             {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
+        )
+
+        filtered["Nationalities"] = filtered["Nationalities"].apply(
+            lambda row: ", ".join(
+                nat if nat else "[Unknown]" for nat in re.findall(r"\((.*?)\)", row)
+            )
         )
 
         # css to hide row indices of table
