@@ -72,8 +72,13 @@ def run():
     dataframe = pd.DataFrame(X, columns = ['x1', 'x2', 'x3'])
     dataframe['class'] = y
     dataframe['id'] = id_arr
-    fig = px.scatter_3d(dataframe, x="x1", y="x2", z="x3", color='class', custom_data=['id'])
-    fig.update_traces(hovertemplate='<b>Moma</b>:<br>%{customdata}<br>(%{x}, %{y}, %{z})')
+    fig = px.scatter_3d(
+        dataframe, x="x1", y="x2", z="x3", color='class', custom_data=['id'], width=800, height=800
+    )
+    fig.update_traces(
+        hovertemplate='<b>Moma</b>:<br>%{customdata}<br>(%{x}, %{y}, %{z})',
+        marker=dict(size=4)
+    )
     
     fig.write_json("./overview/overviewplot.json")
     clear_memory()
