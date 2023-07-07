@@ -73,14 +73,23 @@ def run():
     dataframe['class'] = y
     dataframe['id'] = id_arr
     fig = px.scatter_3d(
-        dataframe, x="x1", y="x2", z="x3", color='class', custom_data=['id'], width=800, height=800
+        dataframe, 
+        x="x1", 
+        y="x2", 
+        z="x3", 
+        color='class', 
+        custom_data=['id'], 
+        width=800, 
+        height=800,
+        text=dataframe['class']
     )
     fig.update_traces(
-        hovertemplate='<b>Moma</b>:<br>%{customdata}<br>(%{x}, %{y}, %{z})',
-        marker=dict(size=4)
+        hovertemplate='<b>%{text}</b><br>Moma link:<br>%{customdata}<br>(%{x}, %{y}, %{z})<extra></extra>',
+        marker=dict(size=4),
+        mode = "markers" # Hides text
     )
-    
     fig.write_json("./overview/overviewplot.json")
+    del model, newmodel
     clear_memory()
     
 
