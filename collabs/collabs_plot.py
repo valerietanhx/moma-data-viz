@@ -15,15 +15,23 @@ CURR_FILEPATH = os.path.dirname(__file__)
 
 collabs_graph_edges_path = os.path.join(CURR_FILEPATH, "CollabsGraphEdges.csv")
 edges = pd.read_csv(collabs_graph_edges_path)
+edges = edges.query("`value` >= 18")  # avoid plot looking like a yarn ball
+# only 49 out of 481 collaborations between nationalities occured >= 18 times!
+# that's a fact to visualise
+
+edge_indexes = (
+    pd.concat([edges["source"], edges["target"]])
+    .drop_duplicates()
+    .to_frame(name="edge_index")
+)
+
 
 collabs_graph_nodes_path = os.path.join(CURR_FILEPATH, "CollabsGraphNodes.csv")
 nodes = pd.read_csv(collabs_graph_nodes_path)
+nodes = nodes.merge(edge_indexes, how="right", left_on="index", right_on="edge_index")
+nodes.drop("edge_index", axis=1, inplace=True)
 nodes = hv.Dataset(nodes, "index")
 
-# maybe restrict to value > a certain number, else it just looks like a yarn ball
-# need to fix this warning too:
-# BokehUserWarning: ColumnDataSource's columns must be of the same length.
-# Current lengths: ('angle', 70), ('text', 72), ('x', 70), ('y', 70)
 chord = hv.Chord((edges, nodes))
 
 
@@ -62,8 +70,4 @@ chord.opts(
 )
 
 
-<<<<<<< HEAD
 # show(hv.render(chord))
-=======
-show(hv.render(chord))  # automatically saves collabs_chord_plot.html in same directory
->>>>>>> a4ec229 (Fix error with chord diagram html file)
