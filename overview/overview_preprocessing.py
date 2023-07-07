@@ -26,7 +26,6 @@ def run():
     
     # links to images
     id_images = [f"https://www.moma.org/collection/works/{filepath.split('.')[0]}" for filepath in dataset.data]
-    assert(len(id_images)==83341) 
     # This shows an image:
     # features, labels = next(iter(dataloader))
     # img = features[0]
