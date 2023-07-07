@@ -10,3 +10,6 @@
 
 # images
 **/images
+
+# jupyter notebook files
+**/*.ipynb

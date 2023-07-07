@@ -63,7 +63,4 @@ chord.opts(
 
 
 # show(hv.render(chord))
-
-# collabs_plot_path = os.path.join(CURR_FILEPATH, "collabs_plot.html")
-# hv.save(chord, collabs_plot_path)
 # hv.save(chord, collabs_plot_path)
