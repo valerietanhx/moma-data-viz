@@ -25,6 +25,7 @@ collab_nationalities = list(  # removing empty strings / unknown nationalities
 )
 
 collab_nationalities = list(filter(lambda x: len(x) > 1, collab_nationalities))
+collab_nationalities = list(filter(lambda x: len(set(x)) > 1, collab_nationalities))
 
 unique_nationalities = sorted(
     {art_nat for group in collab_nationalities for art_nat in group}
@@ -34,7 +35,6 @@ num_unique_nationalities = len(unique_nationalities)
 # adjacency matrix
 row = [0] * num_unique_nationalities
 adj_matrix_plotting = [row.copy() for _ in range(num_unique_nationalities)]
-
 adj_matrix_selection = [row.copy() for _ in range(num_unique_nationalities)]
 
 index_nationality = dict(enumerate(unique_nationalities))
@@ -47,7 +47,9 @@ for group in collab_nationalities:
         artist_1_index = nationality_index[group[i]]
         for j in range(i + 1, len(group)):
             artist_2_index = nationality_index[group[j]]
+
             adj_matrix_plotting[artist_1_index][artist_2_index] += 1
+
             adj_matrix_selection[artist_1_index][artist_2_index] += 1
             adj_matrix_selection[artist_2_index][artist_1_index] += 1
 
