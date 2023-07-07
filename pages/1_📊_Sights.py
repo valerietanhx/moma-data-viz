@@ -87,7 +87,9 @@ with st.expander("Methodology"):
         ```
         </details>
 
-        4. The resulting vectors are condensed into 3 dimensions using sklearn's t-SNE and plotted using Plotly's 3D scatterplot.
+        4. Some classification types are more common than others. We tried to take a smaller sample of more common artforms.
+
+        5. The resulting vectors are condensed into 3 dimensions using sklearn's t-SNE and plotted using Plotly's 3D scatterplot.
             - This plot is saved as a json file.
 
         <details><summary>Show Code</summary>

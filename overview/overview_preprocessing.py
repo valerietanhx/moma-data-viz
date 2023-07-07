@@ -70,18 +70,18 @@ def run():
 
     # Create dataframe
     dataframe = pd.DataFrame(X, columns = ['x1', 'x2', 'x3'])
-    dataframe['class'] = y
+    dataframe['Classification'] = y
     dataframe['id'] = id_arr
     fig = px.scatter_3d(
         dataframe, 
         x="x1", 
         y="x2", 
         z="x3", 
-        color='class', 
+        color='Classification', 
         custom_data=['id'], 
         width=800, 
         height=800,
-        text=dataframe['class']
+        text=dataframe['Classification']
     )
     fig.update_traces(
         hovertemplate='<b>%{text}</b><br>Moma link:<br>%{customdata}<br>(%{x}, %{y}, %{z})<extra></extra>',
