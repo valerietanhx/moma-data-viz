@@ -78,7 +78,6 @@ def run():
     fig.update_traces(hovertemplate='<b>Moma</b>:<br>%{customdata}<br>(%{x}, %{y}, %{z})')
     
     fig.write_json("./overviewplot/overviewplot.json")
-    fig.show()
     clear_memory()
     
 
