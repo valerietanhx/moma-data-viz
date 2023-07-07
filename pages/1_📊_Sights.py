@@ -23,7 +23,7 @@ st.markdown(
     A proportion of art pieces are shown on the scatterplot below, capturing how similar or dissimilar pieces are to one another.
 """
 )
-st.plotly_chart(overview_plot)
+st.plotly_chart(overview_plot, theme=None)
 
 st.subheader("Colours")
 st.divider()
