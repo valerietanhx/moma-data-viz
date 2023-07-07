@@ -79,7 +79,7 @@ def run():
         z="x3", 
         color='Classification', 
         custom_data=['id'], 
-        width=800, 
+        width=1000, 
         height=800,
         text=dataframe['Classification']
     )
