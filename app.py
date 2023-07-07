@@ -1,7 +1,10 @@
+import re
+
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
+from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
 from colours.colour_plot import fig_all as colour_fig_all
 from colours.colour_plot import fig_department as colour_fig_department
 from overview.read_plot import overview_plot
@@ -90,7 +93,7 @@ with col6:
 st.write(
     """
     (Some of these artworks may still look like they have black or grey in them.
-    Colour detection isn't quite perfect yet, it seems :"))
+    Our colour detection method isn't quite perfect yet, it seems :"))
     """
 )
 
@@ -102,7 +105,7 @@ st.subheader("International collaborations")
 
 st.write("What international collaborations are there in MoMa's art collection?")
 
-file = open("collabs/collabs_plot.html", "r", encoding="utf-8")
+file = open("collabs/collabs_chord_plot.html", "r", encoding="utf-8")
 html = file.read()
 components.html(html, width=800, height=600, scrolling=True)
 
@@ -117,6 +120,31 @@ with st.expander("Methodology"):
         are from country A and artist B1 is from country B, only counts as one
         collaboration between countries A and B, not two.
         - HoloViews was used to create the chord diagram above.
+        - Only collaborations between two nationalities that occurred at least 18 times
+        were plotted to strike a balance between engagement and clarity.
+        """
+    )
+
+st.write(
+    """
+    Only 49 out of 481 collaborations between nationalities—just over 10%—occurred >=18
+    times! While many international collaborations appear in MoMa's collection,
+    most of them seem to have been short-lived partnerships.
+    
+    (Though we are, of course, merely looking at nationalities and not individuals;
+    we cannot conclude that this observation reflects nations' bilateral ties.)
+    """
+)
+
+st.plotly_chart(collabs_fig_cdf)
+
+with st.expander("Methodology"):
+    st.markdown(  # might be unclear, to rework
+        """
+        - We calculated the percentile of each unique frequency value x in descending
+        order. This would correspond to the percentage of collaborations that occurred
+        at least x times.
+        - Plotly was used to plot the line graph above.
         """
     )
 
@@ -137,8 +165,8 @@ first_nationality = st.selectbox("First nationality", nationalities)
 first_nationality_index = nodes.query(f"`nationality` == '{first_nationality}'")[
     "index"
 ].tolist()[0]
-edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
-collab_nationalities = edges.query(f"`source` == {first_nationality_index}")
+edges_selection = pd.read_csv("collabs/CollabsSelectionEdges.csv")
+collab_nationalities = edges_selection.query(f"`source` == {first_nationality_index}")
 collab_nationalities = collab_nationalities.merge(
     nodes, how="left", left_on="target", right_on="index"
 )
@@ -177,6 +205,12 @@ else:
         filtered = matches.filter(["Title", "Artist", "Nationality"], axis=1)
         filtered = filtered.rename(
             {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
+        )
+
+        filtered["Nationalities"] = filtered["Nationalities"].apply(
+            lambda row: ", ".join(
+                nat if nat else "[Unknown]" for nat in re.findall(r"\((.*?)\)", row)
+            )
         )
 
         # css to hide row indices of table
