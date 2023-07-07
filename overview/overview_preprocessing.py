@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import random
-from imageclasses import CustomImageFolder
+from image_classes import CustomImageFolder
 from sklearn.manifold import TSNE
 from torchvision import models
 from collections import OrderedDict
@@ -76,7 +76,7 @@ def run():
     fig = px.scatter_3d(dataframe, x="x1", y="x2", z="x3", color='class', custom_data=['id'])
     fig.update_traces(hovertemplate='<b>Moma</b>:<br>%{customdata}<br>(%{x}, %{y}, %{z})')
     
-    fig.write_json("./overviewplot/overviewplot.json")
+    fig.write_json("./overview/overviewplot.json")
     clear_memory()
     
 

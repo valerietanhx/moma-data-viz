@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 
 from colours.colour_plot import fig_all as colour_fig_all
 from colours.colour_plot import fig_department as colour_fig_department
-from overviewplot.readplot import overview_plot
+from overview.read_plot import overview_plot
 
 st.set_page_config(
     page_title="The Sights and Spaces of MoMa",
