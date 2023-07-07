@@ -120,14 +120,14 @@ with st.expander("Methodology"):
         are from country A and artist B1 is from country B, only counts as one
         collaboration between countries A and B, not two.
         - HoloViews was used to create the chord diagram above.
-        - Only collaborations between two nationalities that occurred at least 18 times
+        - Only collaborations between two nationalities that occurred at least 20 times
         were plotted to strike a balance between engagement and clarity.
         """
     )
 
 st.write(
     """
-    Only 49 out of 481 collaborations between nationalities—just over 10%—occurred >=18
+    Only 46 out of 481 collaborations between nationalities—just under 10%—occurred >=20
     times! While many international collaborations appear in MoMa's collection,
     most of them seem to have been short-lived partnerships.
     
