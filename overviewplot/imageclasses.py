@@ -1,11 +1,10 @@
-import torch
 import pandas as pd
 import os
 import re
 import numpy as np
-import torchvision
+
 from torch.utils.data import Dataset
-from torchvision import transforms, models, datasets
+from torchvision import transforms
 from torchvision.io import read_image, ImageReadMode
 from PIL import Image
 

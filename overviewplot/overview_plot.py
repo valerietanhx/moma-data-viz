@@ -5,10 +5,9 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import random
-import time
 from imageclasses import CustomImageFolder
 from sklearn.manifold import TSNE
-from torchvision import models, datasets
+from torchvision import models
 from collections import OrderedDict
 from torch.utils.data import DataLoader
 
