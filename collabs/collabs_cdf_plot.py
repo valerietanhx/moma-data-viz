@@ -14,17 +14,20 @@ freq["pct"] = freq["pct"] * 100
 
 freq = freq.rename(columns={"value": "Frequency", "pct": "Percentage"})
 
-fig_cdf = px.line(
+fig_cdf = px.area(
     freq,
     x="Frequency",
     y="Percentage",
-    title="How many percent of collaborations occur at least x times?<br>"
+    title="What is the percentage of collaborations that occur at least x times?<br>"
     + "<sup>A collaboration refers to a pair of two nations.</sup>",
+    log_x=True,
+    color_discrete_sequence=px.colors.sequential.Agsunset
 )
 fig_cdf.update_layout(
     xaxis_title="Frequency",
     yaxis_title="Percentage of all collaborations",
     xaxis=dict(
-        tickvals=list(range(0, 650, 50)),
+        tickvals=list(range(0, 10)) + list(range(10, 100, 10)) + list(range(100, 650, 100)),
     ),
+    hovermode="x unified"
 )
