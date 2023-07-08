@@ -167,9 +167,9 @@ else:
             """
         )
         random_artwork = matches_with_thumbnails.sample()
-        object_id = int(random_artwork["ObjectID"].tolist()[0])
         title = random_artwork["Title"].tolist()[0]
         artists = random_artwork["Artist"].tolist()[0]
         with st.columns(3)[1]:
-            st.image(f"colours/images/{object_id}.jpg")
+            url = random_artwork["ThumbnailURL"].tolist()[0]
+            st.image(url)
             st.caption(f"_{title}_ by {artists}")

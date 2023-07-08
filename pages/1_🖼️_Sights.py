@@ -95,10 +95,10 @@ random_six = artworks_without_grey.sample(6)
 
 def show_random_image_without_grey(idx):
     row = random_six.iloc[idx]
-    object_id = int(row["ObjectID"])
+    url = row["ThumbnailURL"]
     title = row["Title"]
     artists = row["Artist"]
-    st.image(f"colours/images/{object_id}.jpg")
+    st.image(url)
     st.caption(f"_{title}_ by {artists}")
 
 
