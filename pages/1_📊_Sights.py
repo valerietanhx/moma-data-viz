@@ -29,17 +29,17 @@ with st.expander("Methodology"):
         """
         1. Each image is loaded using an image dataloader and custom dataset class for memory-efficient loading, with the help of PyTorch.
             - Each image is processed and resized to size 3 x 224 x 224.
-            - Greyscale Images are converted to RGB format. 
+            - This means that greyscale Images are converted to RGB format. 
             
-        2. ResNet152, a deep neural network used in image recognition is loaded, and its final fully-connected layer is removed.
+        2. We make use of ResNet152, a deep neural network used in image recognition. This model is loaded and its final fully-connected layer is removed.
 
-        3. Images are loaded into ResNet152 in batches of 64 and fed through the model. The output of each image is a vector of length 2048.
+        3. Images are fed into ResNet152 in batches of 64. The output of each image is a vector of length 2048.
     
         4. Some classification types are more common than others. We tried to take a smaller sample of more common artforms to achieve a more even distribution in our scatterplot.
 
         5. The resulting vectors are condensed from 2048 to 3 dimensions using sklearn's t-SNE and plotted using Plotly's 3D scatterplot.
             - This plot is saved as a json file.
-            
+
         More details can be found on 🖥️[Github](https://github.com/valerietanhx/moma-data-viz/tree/master/overview).
     """,
     unsafe_allow_html=True)
