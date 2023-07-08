@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
 
-from colours.colour_plot import fig_all as colour_fig_all
-from colours.colour_plot import fig_department as colour_fig_department
+from colours.colour_plot_all import fig as colour_fig_all
+from colours.colour_plot_department import fig as colour_fig_department
 from overview.overview_plot import overview_plot
 
 st.set_page_config(
