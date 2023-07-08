@@ -66,7 +66,7 @@ with st.expander("Methodology"):
         ```
         </details>
 
-        3. Images are loaded as a tensor into ResNet152 in batches of 64 and fed through the model. The output of each image is a vector of length 2048.
+        3. Images are loaded into ResNet152 in batches of 64 as a tensor and fed through the model. The output of each image is a vector of length 2048.
         <details><summary>Show Code</summary>
 
         ```python
