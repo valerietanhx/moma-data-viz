@@ -21,7 +21,7 @@ fig_cdf = px.area(
     title="What is the percentage of collaborations that occur at least x times?<br>"
     + "<sup>A collaboration refers to a pair of two nations.</sup>",
     log_x=True,
-    color_discrete_sequence=px.colors.sequential.Agsunset
+    color_discrete_sequence=px.colors.sequential.Agsunset,
 )
 fig_cdf.update_layout(
     xaxis_title="Frequency",
