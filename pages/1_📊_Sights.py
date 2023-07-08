@@ -78,7 +78,7 @@ with st.expander("Methodology"):
         for i, (features, labels) in enumerate(dataloader): 
             # dataloader is a pytorch dataloader object.
             features = features.to("cuda") 
-            # features is a batch of 64 images as (3 x 224 x 224) tensors
+            # features is a batch of 64 images, each represented as (3 x 224 x 224) tensors
             outputs = np.squeeze(
                 newmodel(features).to("cpu").numpy())
                 .tolist() # outputs is a vector
