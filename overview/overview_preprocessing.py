@@ -88,7 +88,7 @@ def run():
         marker=dict(size=4),
         mode = "markers" # Hides text
     )
-    fig.write_json("./overview/overviewplot.json")
+    fig.write_json("./overview/overview_plot.json")
     del model, newmodel
     clear_memory()
     
