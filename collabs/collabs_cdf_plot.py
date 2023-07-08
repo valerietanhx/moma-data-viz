@@ -21,7 +21,9 @@ fig_cdf = px.area(
     title="What is the percentage of collaborations that occur at least x times?<br>"
     + "<sup>A collaboration refers to a pair of two nations.</sup>",
     log_x=True,
-    color_discrete_sequence=px.colors.sequential.Agsunset,
+    color_discrete_sequence=px.colors.sequential.Agsunset, 
+    hover_data={"Frequency": False, "Percentage": True}
+    
 )
 fig_cdf.update_layout(
     xaxis_title="Frequency",
@@ -29,5 +31,5 @@ fig_cdf.update_layout(
     xaxis=dict(
         tickvals=list(range(0, 10)) + list(range(10, 100, 10)) + list(range(100, 650, 100)),
     ),
-    hovermode="x unified"
+    hovermode="x"
 )
