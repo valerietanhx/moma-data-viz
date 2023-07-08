@@ -46,6 +46,9 @@ with st.expander("Methodology"):
         3. HoloViews was used to create the chord diagram above.
         4. Only collaborations between two nationalities that occurred at least 20 times
         were plotted to strike a balance between engagement and clarity.
+
+        More details can be found on
+        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/collabs).
         """
     )
 
@@ -69,6 +72,9 @@ with st.expander("Methodology"):
         order. This would correspond to the percentage of collaborations that occurred
         at least x times.
         2. Plotly was used to plot the line graph above.
+
+        More details can be found on
+        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/collabs).
         """
     )
 

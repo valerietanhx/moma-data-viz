@@ -41,8 +41,8 @@ with st.expander("Methodology"):
         a json file.
 
         More details can be found on
-        🖥️[Github](https://github.com/valerietanhx/moma-data-viz/tree/master/overview).
-        """,
+        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/overview).
+        """
     )
 
 st.markdown(
@@ -76,6 +76,9 @@ with st.expander("Methodology"):
         but modified slightly by us based on our own perception of the colours.
         4. Plotly was used to create the bar charts above based on the frequency
         of each of the basic colour names across the images.
+
+        More details can be found on
+        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/colours).
         """
     )
 
