@@ -5,18 +5,29 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
-from overview.read_plot import overview_plot
 
 st.set_page_config(
-    page_title="The Spaces of MoMa",
-    page_icon="🎨",
+    page_title="Spaces | The Sights and Spaces of MoMa",
+    page_icon="🌐",
 )
 
-st.title("Spaces")
+st.title("Spaces 🌐")
 
-st.subheader("International collaborations")
+# choropleth plot to be inserted here
+st.warning("Choropleth map to be inserted here!")
 
-st.write("What international collaborations are there in MoMa's art collection?")
+st.warning(
+    """
+    Choropleth map comments to be inserted here!
+    """
+)
+
+st.markdown(
+    """
+    MoMa also presents art that transcends geographical boundaries,
+    formed from international collaborations.
+    """
+)
 
 file = open("collabs/collabs_chord_plot.html", "r", encoding="utf-8")
 html = file.read()
@@ -25,20 +36,20 @@ components.html(html, width=800, height=600, scrolling=True)
 with st.expander("Methodology"):
     st.markdown(
         """
-        - We kept the artworks attributed to at least two artists from different
+        1. We kept the artworks attributed to at least two artists from different
         nationalities (i.e. intra-national collaborations were excluded).
-        - A collaboration between two nationalities refers to an artwork where at least
+        2. A collaboration between two nationalities refers to an artwork where at least
         one artist of each nationality contributed to the artwork.
         This means that an artwork by artists A1, A2, and B1, where artists A1 and A2
         are from country A and artist B1 is from country B, only counts as one
         collaboration between countries A and B, not two.
-        - HoloViews was used to create the chord diagram above.
-        - Only collaborations between two nationalities that occurred at least 20 times
+        3. HoloViews was used to create the chord diagram above.
+        4. Only collaborations between two nationalities that occurred at least 20 times
         were plotted to strike a balance between engagement and clarity.
         """
     )
 
-st.write(
+st.markdown(
     """
     Only 46 out of 481 collaborations between nationalities—just under 10%—occurred >=20
     times! While many international collaborations appear in MoMa's collection,
@@ -54,10 +65,10 @@ st.plotly_chart(collabs_fig_cdf)
 with st.expander("Methodology"):
     st.markdown(  # might be unclear, to rework
         """
-        - We calculated the percentile of each unique frequency value x in descending
+        1. We calculated the percentile of each unique frequency value x in descending
         order. This would correspond to the percentage of collaborations that occurred
         at least x times.
-        - Plotly was used to plot the line graph above.
+        2. Plotly was used to plot the line graph above.
         """
     )
 
