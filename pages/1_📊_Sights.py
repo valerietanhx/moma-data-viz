@@ -81,7 +81,7 @@ with st.expander("Methodology"):
             # features is a batch of 64 images as (3 x 224 x 224) tensors
             outputs = np.squeeze(
                 newmodel(features).to("cpu").numpy())
-                .tolist() # A vector
+                .tolist() # outputs is a vector
             datapoints.extend(outputs)
             list_labels.extend(labels)
         ```
