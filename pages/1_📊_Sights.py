@@ -30,81 +30,17 @@ with st.expander("Methodology"):
         1. Each image is loaded using an image dataloader and custom dataset class for memory-efficient loading, with the help of PyTorch.
             - Each image is processed and resized to size 3 x 224 x 224.
             - Greyscale Images are converted to RGB format. 
-        <details><summary>Show Code</summary>
-
-        ```python
-        from torch.utils.data import Dataset
-        class CustomImageFolder(Dataset):
-            TF = transforms.Compose(
-                [transforms.Resize(
-                    (224, 224), antialias=True), transforms.ToTensor()]
-            )
-            def __init__(self, img_dir, csv_dir, transform=TF):
-                # ...
-                self.transform = transform
-
-            def __getitem__(self, idx):
-                try:
-                    img_link = self.data[idx]
-                    img_id = int(img_link.split(".")[0]) # Gets image ID, for example 100346
-                    img = (read_image(self.img_dir + "/" + img_link, ImageReadMode.RGB))
-                # ...
-        ```
-        </details>
-
+            
         2. ResNet152, a deep neural network used in image recognition is loaded, and its final fully-connected layer is removed.
-        <details><summary>Show Code</summary>
 
-        ```python
-        import torch
-        from torchvision import models
-        model = models.resnet152(weights=models.ResNet152_Weights.DEFAULT)
-        # Remove final layer
-        newmodel = torch.nn.Sequential(
-            OrderedDict([*(list(model.named_children())[:-1])])
-        )
-        ```
-        </details>
+        3. Images are loaded into ResNet152 in batches of 64 and fed through the model. The output of each image is a vector of length 2048.
+    
+        4. Some classification types are more common than others. We tried to take a smaller sample of more common artforms to achieve a more even distribution in our scatterplot.
 
-        3. Images are loaded into ResNet152 in batches of 64 as a tensor and fed through the model. The output of each image is a vector of length 2048.
-        <details><summary>Show Code</summary>
-
-        ```python
-        datapoints = []
-        list_labels = []
-        with torch.no_grad():
-        # ...
-        newmodel.to("cuda") # Using GPU
-        for i, (features, labels) in enumerate(dataloader): 
-            # dataloader is a pytorch dataloader object.
-            features = features.to("cuda") 
-            # features is a batch of 64 images, each represented as (3 x 224 x 224) tensors
-            outputs = np.squeeze(
-                newmodel(features).to("cpu").numpy())
-                .tolist() # outputs is a vector
-            datapoints.extend(outputs)
-            list_labels.extend(labels)
-        ```
-        </details>
-
-        4. Some classification types are more common than others. We tried to take a smaller sample of more common artforms.
-
-        5. The resulting vectors are condensed into 3 dimensions using sklearn's t-SNE and plotted using Plotly's 3D scatterplot.
+        5. The resulting vectors are condensed from 2048 to 3 dimensions using sklearn's t-SNE and plotted using Plotly's 3D scatterplot.
             - This plot is saved as a json file.
-
-        <details><summary>Show Code</summary>
-
-        ```python
-        import plotly.express as px
-        from sklearn.manifold import TSNE
-        tsne = TSNE(n_components=3, verbose=1, perplexity=40, n_iter=400)
-        X = tsne.fit_transform(X_prior)
-        fig = px.scatter_3d(...)
-        fig.write_json(...)
-        ```
-        </details>
-
-        > More details can be found on Github.
+            
+        More details can be found on 🖥️[Github](https://github.com/valerietanhx/moma-data-viz/tree/master/overview).
     """,
     unsafe_allow_html=True)
 st.subheader("Colours")
