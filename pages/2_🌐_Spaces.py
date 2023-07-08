@@ -14,7 +14,7 @@ st.set_page_config(
 
 st.title("Spaces 🌐")
 
-st.plotly_chart(countries_fig)
+st.plotly_chart(countries_fig, theme=None)
 
 st.markdown(
     """
