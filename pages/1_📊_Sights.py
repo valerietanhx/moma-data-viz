@@ -95,6 +95,7 @@ with st.expander("Methodology"):
         <details><summary>Show Code</summary>
 
         ```python
+        import plotly.express as px
         from sklearn.manifold import TSNE
         tsne = TSNE(n_components=3, verbose=1, perplexity=40, n_iter=400)
         X = tsne.fit_transform(X_prior)
