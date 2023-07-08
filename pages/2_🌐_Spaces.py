@@ -5,6 +5,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
+from countries.countries_plot import countries_fig
 
 st.set_page_config(
     page_title="Spaces | The Sights and Spaces of MoMa",
@@ -13,12 +14,11 @@ st.set_page_config(
 
 st.title("Spaces 🌐")
 
-# choropleth plot to be inserted here
-st.warning("Choropleth map to be inserted here!")
+st.plotly_chart(countries_fig)
 
-st.warning(
+st.markdown(
     """
-    Choropleth map comments to be inserted here!
+    MoMa, however, also presents art that transcends geographical boundaries, formed from international collaborations.
     """
 )
 
