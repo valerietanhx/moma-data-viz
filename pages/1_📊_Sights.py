@@ -56,7 +56,7 @@ with st.expander("Methodology"):
         <details><summary>Show Code</summary>
 
         ```python
-        import pytorch
+        import torch
         from torchvision import models
         model = models.resnet152(weights=models.ResNet152_Weights.DEFAULT)
         # Remove final layer
