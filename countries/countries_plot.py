@@ -15,4 +15,15 @@ countries_fig = px.choropleth(
     color_continuous_scale=px.colors.sequential.Purpor, 
 )
 
+countries_fig.update_layout(
+    autosize=False,
+    margin = dict(
+        l=0,
+        r=0,
+        b=0,
+        t=0,
+        pad=2,
+        autoexpand=True
+        ), height=500
+    )
 
