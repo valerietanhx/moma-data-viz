@@ -29,7 +29,7 @@ fig_cdf.update_layout(
     xaxis_title="Frequency",
     yaxis_title="Percentage of all collaborations",
     xaxis=dict(
-        tickvals=list(range(0, 10, 2)) + list(range(10, 100, 20)) + list(range(100, 650, 200)),
+        tickvals=list(range(1, 10, 2)) + list(range(10, 100, 20)) + list(range(100, 650, 200)),
     ),
     hovermode="x"
 )
