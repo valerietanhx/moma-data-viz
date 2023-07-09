@@ -18,7 +18,12 @@ st.plotly_chart(countries_fig, theme=None)
 
 st.markdown(
     """
-    MoMa, however, also presents art that transcends geographical boundaries, formed from international collaborations.
+    The collection is overwhelmingly American with a total of 5191 artists from the
+    United States, though this is to be expected of an American museum.
+    Thus, the collection may not be fully representative of the global
+    modern art landscape. Following far behind in second place is Germany with
+    965 artists represented, then the United Kingdom, France, and Italy with
+    860, 845, and 536 artists respectively.
     """
 )
 
