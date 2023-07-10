@@ -20,11 +20,6 @@ logging.basicConfig(
 
 IMAGE_FOLDER = "images"
 CURR_FILEPATH = os.path.dirname(__file__)
-# i know relative path is a thing!!!
-# but it doesn't work with "run python file in terminal" in vscode
-# bc it runs from moma-data-viz, not this subfolder :O
-# :"D maybe i should start running my code differently? this is q messy
-# to be continued.......
 
 
 async def download_image(image_id, session, url):
@@ -168,18 +163,3 @@ def convert_all_css_palettes():
 
 
 # convert_all_css_palettes()
-
-
-def artworks_no_grey():
-    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
-    basic_palettes = pd.read_csv(basic_palettes_path)
-    thumbnails_csv_path = os.path.join(CURR_FILEPATH, "ArtworksWithThumbnails.csv")
-    artworks_with_thumbnails = pd.read_csv(thumbnails_csv_path)
-    merged = basic_palettes.merge(artworks_with_thumbnails, on="ObjectID")
-    artworks_without_grey = merged.query("~`BasicPalette`.str.contains('grey')")
-    return artworks_without_grey
-
-
-# artworks_without_grey = artworks_no_grey()
-# no_grey_path = os.path.join(CURR_FILEPATH, "ArtworksWithoutGrey.csv")
-# artworks_without_grey.to_csv(no_grey_path, index=False)

@@ -1,20 +1,16 @@
 import math
-import os
 
 import holoviews as hv
 import numpy as np
 import pandas as pd
-
 from bokeh.plotting import show
 from holoviews import dim
 
 hv.extension("bokeh")
 hv.output(size=200)
 
-CURR_FILEPATH = os.path.dirname(__file__)
 
-collabs_graph_edges_path = os.path.join(CURR_FILEPATH, "CollabsGraphEdges.csv")
-edges = pd.read_csv(collabs_graph_edges_path)
+edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
 edges = edges.query("`value` >= 20")  # avoid plot looking like a yarn ball
 
 edge_indexes = (
@@ -24,8 +20,7 @@ edge_indexes = (
 )
 
 
-collabs_graph_nodes_path = os.path.join(CURR_FILEPATH, "CollabsGraphNodes.csv")
-nodes = pd.read_csv(collabs_graph_nodes_path)
+nodes = pd.read_csv("collabs/CollabsGraphNodes.csv")
 nodes = nodes.merge(edge_indexes, how="right", left_on="index", right_on="edge_index")
 nodes.drop("edge_index", axis=1, inplace=True)
 nodes = hv.Dataset(nodes, "index")

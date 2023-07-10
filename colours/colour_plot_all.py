@@ -1,14 +1,9 @@
-import os
-
 import pandas as pd
 import plotly.express as px
 
-CURR_FILEPATH = os.path.dirname(__file__)
-
 
 def get_frequencies_of_basic_colour_groups():
-    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
-    basic_palettes = pd.read_csv(basic_palettes_path)
+    basic_palettes = pd.read_csv("colours/BasicPalettes.csv")
     basic_colour_groups = basic_palettes["BasicPalette"].values.tolist()
     combined = [colour for group in basic_colour_groups for colour in eval(group)]
     unique_colours = set(combined)

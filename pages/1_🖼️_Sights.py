@@ -67,7 +67,9 @@ with st.expander("Methodology"):
         2. For each image, we retrieved an RGB colour palette of the six most dominant
         colours in it with the [ColorThief](https://github.com/fengsp/color-thief-py)
         module, before converting each hex code to the name of the closest named CSS
-        colour with the [webcolors](https://pypi.org/project/webcolors/) module.
+        colour with the [webcolors](https://pypi.org/project/webcolors/) module and
+        a KDTree data structure, which finds the closest colour in the rgb space
+        based on Euclidean distance.
         3. We then mapped each CSS colour name to one of ten basic colour names:
         red, orange, yellow, green, blue, purple, pink, brown, grey, and white.
         The mapping was inspired by
@@ -85,16 +87,20 @@ with st.expander("Methodology"):
 st.markdown(
     """
     Most of the 83349 artworks (82301 of them, in fact—that's around 98.7%!) 
-    have grey as one of their dominant colours. Here are some that don't!
+    have grey as one of their six dominant colours. Here are some that don't!
+
+    (Some of these artworks may still look like they have black or grey in them;
+    our colour detection method sadly isn't perfect.)
     """
 )
 
-artworks_without_grey = pd.read_csv("colours/ArtworksWithoutGrey.csv")
-random_six = artworks_without_grey.sample(6)
+basic_palettes = pd.read_csv("colours/BasicPalettes.csv")
+artworks_with_thumbnails = pd.read_csv("colours/ArtworksWithThumbnails.csv")
+merged = basic_palettes.merge(artworks_with_thumbnails, on="ObjectID")
 
 
-def show_random_image_without_grey(idx):
-    row = random_six.iloc[idx]
+def show_random_image(sample, idx):
+    row = sample.iloc[idx]
     url = row["ThumbnailURL"]
     title = row["Title"]
     artists = row["Artist"]
@@ -102,31 +108,67 @@ def show_random_image_without_grey(idx):
     st.caption(f"_{title}_ by {artists}")
 
 
+artworks_without_grey = merged.query("~`BasicPalette`.str.contains('grey')")
+random_six_without_grey = artworks_without_grey.sample(6)
+
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    show_random_image_without_grey(0)
+    show_random_image(random_six_without_grey, 0)
 
 with col2:
-    show_random_image_without_grey(1)
+    show_random_image(random_six_without_grey, 1)
 
 with col3:
-    show_random_image_without_grey(2)
+    show_random_image(random_six_without_grey, 2)
 
 col4, col5, col6 = st.columns(3)
 
 with col4:
-    show_random_image_without_grey(3)
+    show_random_image(random_six_without_grey, 3)
 
 with col5:
-    show_random_image_without_grey(4)
+    show_random_image(random_six_without_grey, 4)
 
 with col6:
-    show_random_image_without_grey(5)
+    show_random_image(random_six_without_grey, 5)
 
 st.markdown(
     """
-    (Some of these artworks may still look like they have black or grey in them.
-    Our colour detection method isn't quite perfect yet, it seems :"))
+    On the other end of the spectrum is orange, with only 67 artworks featuring it
+    as one of their six dominant colours. (It's likely that more artworks actually
+    feature orange, but a shade more similar to brown, and thus read as such.)
+    
+    Which artworks have orange in them?
+
+    (Once again, some of these artworks may not appear to contain orange.
+    One limitation of our method of mapping colours to names is that it often confuses
+    orange and yellow colours :"))
     """
 )
+
+artworks_with_orange = merged.query("`BasicPalette`.str.contains('orange')")
+random_six_with_orange = artworks_with_orange.sample(6)
+
+col7, col8, col9 = st.columns(3)
+
+with col7:
+    show_random_image(random_six_with_orange, 0)
+
+with col8:
+    show_random_image(random_six_with_orange, 1)
+
+with col9:
+    show_random_image(random_six_with_orange, 2)
+
+col10, col11, col12 = st.columns(3)
+
+with col10:
+    show_random_image(random_six_with_orange, 3)
+
+with col11:
+    show_random_image(random_six_with_orange, 4)
+
+with col12:
+    show_random_image(random_six_with_orange, 5)
