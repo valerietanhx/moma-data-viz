@@ -85,7 +85,7 @@ def run():
         text=dataframe['Classification']
     )
     fig.update_traces(
-        hovertemplate='<b>%{text}</b><br>Moma link:<br>%{customdata}<br>(%{x}, %{y}, %{z})<extra></extra>',
+        hovertemplate='<b>%{text}</b><br>MoMa link:<br>%{customdata}<br>(%{x}, %{y}, %{z})<extra></extra>',
         marker=dict(size=4),
         mode = "markers" # Hides text
     )

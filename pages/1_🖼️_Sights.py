@@ -19,6 +19,9 @@ st.markdown(
     in the artwork's formal qualities that might not be immediately apparent.
     A proportion of art pieces are shown on the scatterplot below, capturing how
     similar or dissimilar pieces are to one another.
+
+    Hover around the graph to view details on each individual piece of artwork.
+    Click/Double click the panel on the right to view only certain artpieces that fall under specific categories.
     """
 )
 
