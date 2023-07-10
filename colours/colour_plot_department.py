@@ -1,16 +1,10 @@
-import os
-
 import pandas as pd
 import plotly.express as px
 
-CURR_FILEPATH = os.path.dirname(__file__)
-
 
 def get_frequencies_of_basic_colour_groups_by_department():
-    basic_palettes_path = os.path.join(CURR_FILEPATH, "BasicPalettes.csv")
-    basic_palettes = pd.read_csv(basic_palettes_path)
-    thumbnails_path = os.path.join(CURR_FILEPATH, "ArtworksWithThumbnails.csv")
-    artworks_with_thumbnails = pd.read_csv(thumbnails_path)
+    basic_palettes = pd.read_csv("colours/BasicPalettes.csv")
+    artworks_with_thumbnails = pd.read_csv("colours/ArtworksWithThumbnails.csv")
     merged = basic_palettes.merge(artworks_with_thumbnails, on="ObjectID")
     df_as_list = []
     for department in list(merged["Department"].unique()):

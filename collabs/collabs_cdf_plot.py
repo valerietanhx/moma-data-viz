@@ -1,12 +1,7 @@
-import os
-
 import pandas as pd
 import plotly.express as px
 
-CURR_FILEPATH = os.path.dirname(__file__)
-
-collabs_graph_edges_path = os.path.join(CURR_FILEPATH, "CollabsGraphEdges.csv")
-edges = pd.read_csv(collabs_graph_edges_path)
+edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
 
 edges["pct"] = edges["value"].rank(method="max", pct=True, ascending=False)
 freq = edges[["value", "pct"]].drop_duplicates().sort_values(by="value")
@@ -21,15 +16,16 @@ fig_cdf = px.area(
     title="What is the percentage of collaborations that occur at least x times?<br>"
     + "<sup>A collaboration refers to a pair of two nations.</sup>",
     log_x=True,
-    color_discrete_sequence=px.colors.sequential.Agsunset, 
-    hover_data={"Frequency": False, "Percentage": True}
-    
+    color_discrete_sequence=px.colors.sequential.Agsunset,
+    hover_data={"Frequency": False, "Percentage": True},
 )
 fig_cdf.update_layout(
     xaxis_title="Frequency",
     yaxis_title="Percentage of all collaborations",
     xaxis=dict(
-        tickvals=list(range(0, 11, 2)) + list(range(0, 101, 20)) + list(range(100, 650, 200)),
+        tickvals=list(range(0, 11, 2))
+        + list(range(0, 101, 20))
+        + list(range(100, 650, 200)),
     ),
-    hovermode="x"
+    hovermode="x",
 )
