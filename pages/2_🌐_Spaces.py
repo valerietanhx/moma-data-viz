@@ -20,17 +20,24 @@ st.markdown(
     """
     The collection is overwhelmingly American with a total of 5191 artists from the
     United States, though this is to be expected of an American museum.
-    Thus, the collection may not be fully representative of the global
-    modern art landscape. Following far behind in second place is Germany with
+    
+    Following far behind in second place is Germany with
     965 artists represented, then the United Kingdom, France, and Italy with
-    860, 845, and 536 artists respectively.
+    860, 845, and 536 artists respectively. Notably, these are all countries in the
+    Western world, while few African or Asian artists appear in MoMa's art collection,
+    suggesting that the collection may not be fully representative of the global
+    modern art landscape.
     """
 )
 
 st.markdown(
     """
     MoMa also presents art that transcends geographical boundaries,
-    formed from international collaborations.
+    formed from international collaborations. We present here pairs of countries that
+    have collaborated at least 20 times.
+
+    Click on a country's chords to highlight it and get a clearer view of its
+    international collaborations!
     """
 )
 
