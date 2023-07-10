@@ -16,12 +16,14 @@ st.subheader("Overview")
 
 st.markdown(
     """We begin this theme with an overview of the art collection, revealing patterns
-    in the artwork's formal qualities that might not be immediately apparent.
-    A proportion of art pieces are shown on the scatterplot below, capturing how
-    similar or dissimilar pieces are to one another.
+    in the artworks' formal qualities that might not be immediately apparent.
+    A random sample of artworks is shown on the scatterplot below, capturing how
+    visually similar or dissimilar artworks are to one another.
 
-    Hover around the graph to view details on each individual piece of artwork.
-    Click/Double click the panel on the right to view only certain artpieces that fall under specific categories.
+    Hover around the graph to view details of each individual artwork, including
+    the link to their individual page on the MoMa website.
+    Click a category in the panel on the right to only view artworks that fall under
+    that specific category, and double-click to unselect.
     """
 )
 
