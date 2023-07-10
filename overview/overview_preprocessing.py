@@ -59,7 +59,8 @@ def run():
 
     assert(len(datapoints) == len(list_labels))
 
-    sampled = [(datapoints[i], list_labels[i], id_images[i]) for i in range(len(datapoints)) if random.random() <= weighted_class_sampling_probabilities[list_labels[i]]]
+    sampled = [(datapoints[i], list_labels[i], id_images[i]) for i in range(len(datapoints)) if random.random() <= weighted_class_sampling_probabilities[list_labels[i]] and
+            list_labels[i] != "(not assigned)"] # Remove unassigned labels
     assert(len(sampled)>0)
     sampled_X, sampled_y, sampled_id = list(zip(*sampled))
     X_prior, y, id_arr = np.array(sampled_X), np.array(sampled_y), np.array(sampled_id)
@@ -84,7 +85,7 @@ def run():
         text=dataframe['Classification']
     )
     fig.update_traces(
-        hovertemplate='<b>%{text}</b><br>Moma link:<br>%{customdata}<br>(%{x}, %{y}, %{z})<extra></extra>',
+        hovertemplate='<b>%{text}</b><br>MoMa link:<br>%{customdata}<br>(%{x}, %{y}, %{z})<extra></extra>',
         marker=dict(size=4),
         mode = "markers" # Hides text
     )
