@@ -59,8 +59,6 @@ country_count = nationality_count.merge(
     demonyms, how="left", left_on="Nationality", right_on="demonym"
 )
 
-country_count = country_count[["country", "count"]]
-
 cc = coco.CountryConverter()
 
 country_count["iso3_codes"] = cc.pandas_convert(
@@ -69,3 +67,9 @@ country_count["iso3_codes"] = cc.pandas_convert(
 
 country_count_path = os.path.join(CURR_FILEPATH, "CountryCount.csv")
 country_count.to_csv(country_count_path, index=False)
+
+single_artists = country_count.query("`count` == 1")["Nationality"].tolist()
+solo_representations = artists[artists['Nationality'].isin(single_artists)]
+
+solo_representations_path = os.path.join(CURR_FILEPATH, "SoloRepresentations.csv")
+solo_representations.to_csv(solo_representations_path, index=False)
