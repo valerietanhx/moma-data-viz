@@ -25,6 +25,7 @@ countries_fig.add_scattergeo(
     text=new_df["Count"],
     mode="text",
     hoverinfo="skip",
+    textfont=dict(color="black"),
     showlegend=False
 )
 usa = df[df["iso3_codes"] == "USA"]
@@ -44,6 +45,6 @@ countries_fig.add_scattergeo(
     text=fra_deu["Count"],
     mode="text",
     hoverinfo="skip",
-    textfont=dict(size=7.5),
-    showlegend=False
+    textfont=dict(size=7.5, color="red"),
+    showlegend=False,
 )
