@@ -24,7 +24,8 @@ countries_fig.add_scattergeo(
     locations=new_df["iso3_codes"],
     text=new_df["Count"],
     mode="text",
-    hoverinfo="skip"
+    hoverinfo="skip",
+    showlegend=False
 )
 usa = df[df["iso3_codes"] == "USA"]
 countries_fig.add_scattergeo(
@@ -33,7 +34,8 @@ countries_fig.add_scattergeo(
     text=usa["Count"],
     mode="text",
     hoverinfo="skip",
-    textfont=dict(color="white")
+    textfont=dict(color="white"),
+    showlegend=False
 )
 fra_deu = df[df["iso3_codes"].isin(["FRA", "DEU"])]
 countries_fig.add_scattergeo(
@@ -42,7 +44,6 @@ countries_fig.add_scattergeo(
     text=fra_deu["Count"],
     mode="text",
     hoverinfo="skip",
-    textfont=dict(size=7.5)
+    textfont=dict(size=7.5),
+    showlegend=False
 )
-
-countries_fig.show()
