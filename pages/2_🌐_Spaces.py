@@ -182,6 +182,15 @@ else:
             {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
         )
 
+        filtered["Artists"] = filtered["Artists"].apply(
+            lambda row: ", ".join(
+                map(
+                    lambda x: "[Various Artists]" if x == "Various Artists" else x,
+                    row.split(", "),
+                )
+            )
+        )
+
         filtered["Nationalities"] = filtered["Nationalities"].apply(
             lambda row: ", ".join(
                 nat if nat else "[Unknown]" for nat in re.findall(r"\((.*?)\)", row)
