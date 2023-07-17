@@ -7,6 +7,12 @@ st.set_page_config(
 
 st.title("The Sights and Spaces of MoMa 🏛️")
 
+with st.sidebar:
+    st.sidebar.info("""
+                    This app is designed by two students from the National Unversity of Singapore.
+                    """, icon="🏠")
+    st.sidebar.success("Happy Browsing!")
+
 st.markdown(
     """
     The Museum of Modern Art (MoMa) houses one of the largest collections of modern art
