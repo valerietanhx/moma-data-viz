@@ -212,7 +212,17 @@ else:
     else:
         num_times = str(num_collabs) + " times"
 
+    matches["Artist"] = matches["Artist"].apply(
+        lambda row: ", ".join(
+            map(
+                lambda x: "[Various Artists]" if x == "Various Artists" else x,
+                row.split(", "),
+            )
+        )
+    )
+
     matches_with_thumbnails = matches.dropna(subset=["ThumbnailURL"])
+
     if len(matches_with_thumbnails) == 0:
         st.write(
             f"""
@@ -224,15 +234,6 @@ else:
         filtered = matches.filter(["Title", "Artist", "Nationality", "URL"], axis=1)
         filtered = filtered.rename(
             {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
-        )
-
-        filtered["Artists"] = filtered["Artists"].apply(
-            lambda row: ", ".join(
-                map(
-                    lambda x: "[Various Artists]" if x == "Various Artists" else x,
-                    row.split(", "),
-                )
-            )
         )
 
         filtered["Nationalities"] = filtered["Nationalities"].apply(
