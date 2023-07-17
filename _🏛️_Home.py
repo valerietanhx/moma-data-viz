@@ -25,5 +25,7 @@ st.markdown(
     """
 )
 
-
-    
+st.image("home-image.jpg")
+st.caption(
+    "Photo by [Mick Haupt](https://unsplash.com/@rocinante_11) on [Unsplash](https://unsplash.com/)."
+)
