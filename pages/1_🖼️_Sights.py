@@ -124,7 +124,14 @@ def show_random_image(sample, idx):
 
 artworks_without_grey = merged.query("~`BasicPalette`.str.contains('grey')")
 random_six_without_grey = artworks_without_grey.sample(6)
-
+random_six_without_grey["Artist"] = random_six_without_grey["Artist"].apply(
+    lambda row: ", ".join(
+        map(
+            lambda x: "[Various Artists]" if x == "Various Artists" else x,
+            row.split(", "),
+        )
+    )
+)
 
 col1, col2, col3 = st.columns(3)
 
@@ -165,6 +172,14 @@ st.markdown(
 
 artworks_with_orange = merged.query("`BasicPalette`.str.contains('orange')")
 random_six_with_orange = artworks_with_orange.sample(6)
+random_six_with_orange["Artist"] = random_six_with_orange["Artist"].apply(
+    lambda row: ", ".join(
+        map(
+            lambda x: "[Various Artists]" if x == "Various Artists" else x,
+            row.split(", "),
+        )
+    )
+)
 
 col7, col8, col9 = st.columns(3)
 
