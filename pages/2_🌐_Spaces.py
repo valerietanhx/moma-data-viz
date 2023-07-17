@@ -2,15 +2,16 @@ import re
 
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
-
-from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
-from countries.countries_plot import countries_fig
 
 st.set_page_config(
     page_title="Spaces | The Sights and Spaces of MoMa",
     page_icon="🌐",
 )
+
+with st.spinner("Loading..."):
+    import streamlit.components.v1 as components
+    from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
+    from countries.countries_plot import countries_fig
 
 st.title("Spaces 🌐")
 
@@ -25,6 +26,21 @@ hide_table_row_index = """
 st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
 st.plotly_chart(countries_fig, theme=None)
+
+with st.expander("Methodology"):
+    st.markdown(
+        """
+        1. We performed manual cleaning to obtain artist nationalities.
+        2. We then made use of Github user knowitall's [demonyms.csv](https://github.com/knowitall/chunkedextractor/blob/master/src/main/resources/edu/knowitall/chunkedextractor/demonyms.csv) 
+            to convert nationalities to countries (e.g. from "Japanese" to "Japan").
+        3. We then used the [country-converter](https://pypi.org/project/country-converter/) library to obtain country codes in ISO-3 format, which was necessary for us plot the choropleth.
+        4. Plotly was used to create the choropleth.
+        
+        More details can be found on
+        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/countries).
+        """
+    )
+
 
 st.markdown(
     """
@@ -42,6 +58,7 @@ st.markdown(
     the countries they come from!
     """
 )
+
 
 solo_representations = pd.read_csv("countries/SoloRepresentationsEnhanced.csv")
 solo_representations = solo_representations[["DisplayName", "Nationality", "URL"]]
@@ -140,6 +157,7 @@ matches = collabs.query(
 
 # don't think this should appear given the way streamlit options work?
 # but leaving here for now in case
+
 if len(matches) == 0:
     st.info(
         f"""
@@ -217,5 +235,6 @@ else:
         artists = random_artwork["Artist"].tolist()[0]
         with st.columns(3)[1]:
             url = random_artwork["ThumbnailURL"].tolist()[0]
-            st.image(url)
-            st.caption(f"_{title}_ by {artists}")
+            with st.spinner("Loading..."):    
+                st.image(url)
+                st.caption(f"_{title}_ by {artists}")
