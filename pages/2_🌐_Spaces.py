@@ -95,11 +95,11 @@ st.text("")  # line break
 st.markdown(
     """
     MoMa also presents art that transcends geographical boundaries,
-    formed from international collaborations. We present here pairs of countries that
-    have collaborated at least 20 times.
+    formed from international collaborations. We present here pairs of nationalities
+    that have collaborated at least 20 times.
 
-    Hover over the edge closes to a country to highlight its chords and get a clearer
-    view of its international collaborations!
+    Hover over the edge closest to a nationality to highlight its chords and get a
+    clearer view of its international collaborations!
     """
 )
 
