@@ -5,9 +5,14 @@ st.set_page_config(
     page_icon="🏛️",
 )
 
+with st.sidebar:
+    st.caption(
+        "Source code on [GitHub](https://github.com/valerietanhx/moma-data-viz/)."
+    )
+
 st.title("The Sights and Spaces of MoMa 🏛️")
 
-st.text("") # line break
+st.text("")  # line break
 
 st.image("home-image.jpg")
 st.caption(

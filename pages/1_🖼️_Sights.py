@@ -48,7 +48,7 @@ with st.expander("Methodology"):
         a json file.
 
         More details can be found on
-        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/overview).
+        🖥️ [GitHub](https://github.com/valerietanhx/moma-data-viz/tree/master/overview).
         """
     )
 
@@ -87,7 +87,7 @@ with st.expander("Methodology"):
         of each of the basic colour names across the images.
 
         More details can be found on
-        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/colours).
+        🖥️ [GitHub](https://github.com/valerietanhx/moma-data-viz/tree/master/colours).
         """
     )
 
