@@ -55,14 +55,22 @@ for group in collab_nationalities:
 
 # get into source | dest | count format
 edges_plotting = []  # used to plot chord diagram
-edges_selection = []  # used for selection of two nationalities
+edges_selection = []  # used for selection of two nationalities. bidirectional
 for i in range(num_unique_nationalities):
     for j in range(num_unique_nationalities):
         if adj_matrix_plotting[i][j] != 0:
-            edge = [i, j, adj_matrix_plotting[i][j]]
+            edge = [
+                index_nationality[i],
+                index_nationality[j],
+                adj_matrix_plotting[i][j],
+            ]
             edges_plotting.append(edge)
         if adj_matrix_selection[i][j] != 0:
-            edge = [i, j, adj_matrix_selection[i][j]]
+            edge = [
+                index_nationality[i],
+                index_nationality[j],
+                adj_matrix_selection[i][j],
+            ]
             edges_selection.append(edge)
 
 collabs_graph_edges = pd.DataFrame(
@@ -76,9 +84,3 @@ collabs_selection_edges = pd.DataFrame(
 )
 collabs_selection_edges_path = os.path.join(CURR_FILEPATH, "CollabsSelectionEdges.csv")
 collabs_selection_edges.to_csv(collabs_selection_edges_path, index=False)
-
-collabs_graph_nodes = pd.DataFrame.from_dict(
-    index_nationality, orient="index", columns=["nationality"]
-).reset_index()
-collabs_graph_nodes_path = os.path.join(CURR_FILEPATH, "CollabsGraphNodes.csv")
-collabs_graph_nodes.to_csv(collabs_graph_nodes_path, index=False)

@@ -4,32 +4,26 @@ import holoviews as hv
 import numpy as np
 import pandas as pd
 from bokeh.plotting import show
-from holoviews import dim
 
 hv.extension("bokeh")
 hv.output(size=200)
 
-
 edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
 edges = edges.query("`value` >= 20")  # avoid plot looking like a yarn ball
+unique_nationalities_edges = pd.concat([edges["source"], edges["target"]]).unique()
 
-edge_indexes = (
-    pd.concat([edges["source"], edges["target"]])
-    .drop_duplicates()
-    .to_frame(name="edge_index")
+selection = pd.read_csv("collabs/CollabsSelectionEdges.csv")
+selection = selection[
+    selection["source"].isin(unique_nationalities_edges)
+    & selection["target"].isin(unique_nationalities_edges)
+][["source", "value"]]
+nationality_freq = selection.groupby("source").sum().reset_index()
+nationality_freq = nationality_freq.rename(
+    columns={"source": "Nationality", "value": "Total Count"}
 )
 
-
-nodes = pd.read_csv("collabs/CollabsGraphNodes.csv")
-nodes = nodes.merge(edge_indexes, how="right", left_on="index", right_on="edge_index")
-nodes.drop("edge_index", axis=1, inplace=True)
-
-nodes = nodes.rename(
-    columns={"index": "Index", "nationality": "Nationality"}
-)  # TODO: find a way to remove "index" (seems unlikely).....
-nodes = hv.Dataset(nodes, "Alphabetical order")
-
-chord = hv.Chord((edges, nodes))
+nationality_freq = hv.Dataset(nationality_freq, "Nationality")
+chord = hv.Chord((edges, nationality_freq))
 
 
 # https://stackoverflow.com/questions/65561927/inverted-label-text-half-turn-for-chord-diagram-on-holoviews-with-bokeh/65610161#65610161
@@ -58,13 +52,12 @@ def rotate_label(plot, element):
 
 
 chord.opts(
-    cmap="Category20",
-    edge_cmap="Category20",
-    edge_color=dim("source").str(),
+    cmap="Set3",
+    edge_cmap="Set3",
+    edge_color="source",
     labels="Nationality",
-    node_color=dim("Nationality").str(),
+    node_color="Nationality",
     hooks=[rotate_label],
 )
-
 
 show(hv.render(chord))

@@ -116,26 +116,20 @@ st.write(
     """
 )
 
-nodes = pd.read_csv("collabs/CollabsGraphNodes.csv")
-nationalities = nodes["nationality"]
+edges_selection = pd.read_csv("collabs/CollabsSelectionEdges.csv")
+nationalities = edges_selection["source"].unique()
 
 # pick first nationality
 first_nationality = st.selectbox("First nationality", nationalities)
 
 # get nationalities that selected nationality has collaborated with
-first_nationality_index = nodes.query(f"`nationality` == '{first_nationality}'")[
-    "index"
-].tolist()[0]
 edges_selection = pd.read_csv("collabs/CollabsSelectionEdges.csv")
-collab_nationalities = edges_selection.query(f"`source` == {first_nationality_index}")
-collab_nationalities = collab_nationalities.merge(
-    nodes, how="left", left_on="target", right_on="index"
-)
+collab_nationalities = edges_selection.query(f"`source` == '{first_nationality}'")[
+    "target"
+].unique()
 
 # pick second nationality out of the filtered nationalities
-second_nationality = st.selectbox(
-    "Second nationality", collab_nationalities["nationality"]
-)
+second_nationality = st.selectbox("Second nationality", collab_nationalities)
 
 # find matches
 collabs = pd.read_csv("collabs/Collabs.csv")
@@ -186,6 +180,15 @@ else:
         filtered = matches.filter(["Title", "Artist", "Nationality", "URL"], axis=1)
         filtered = filtered.rename(
             {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
+        )
+
+        filtered["Artists"] = filtered["Artists"].apply(
+            lambda row: ", ".join(
+                map(
+                    lambda x: "[Various Artists]" if x == "Various Artists" else x,
+                    row.split(", "),
+                )
+            )
         )
 
         filtered["Nationalities"] = filtered["Nationalities"].apply(
