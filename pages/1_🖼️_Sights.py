@@ -1,22 +1,22 @@
 import pandas as pd
 import streamlit as st
 
-from colours.colour_plot_all import fig as colour_fig_all
-from colours.colour_plot_department import fig as colour_fig_department
-from overview.overview_plot import overview_plot
-
 st.set_page_config(
     page_title="Sights | The Sights and Spaces of MoMa",
     page_icon="🖼️",
 )
+with st.spinner("Loading..."):    
+    from colours.colour_plot_all import fig as colour_fig_all
+    from colours.colour_plot_department import fig as colour_fig_department
+    from overview.overview_plot import overview_plot
 
 st.title("Sights 🖼️")
 
 st.subheader("Overview")
 
 st.markdown(
-    """We begin this theme with an overview of the art collection, revealing patterns
-
+    """
+    We begin this theme with an overview of the art collection, revealing patterns
     in the artworks' formal qualities that might not be immediately apparent.
     A random sample of artworks is shown on the scatterplot below, capturing how
     visually similar or dissimilar artworks are to one another.
@@ -28,7 +28,8 @@ st.markdown(
     """
 )
 
-st.plotly_chart(overview_plot, theme=None)
+with st.spinner("Loading..."):
+    st.plotly_chart(overview_plot, theme=None)
 
 with st.expander("Methodology"):
     st.markdown(

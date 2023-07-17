@@ -2,15 +2,16 @@ import re
 
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
-
-from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
-from countries.countries_plot import countries_fig
 
 st.set_page_config(
     page_title="Spaces | The Sights and Spaces of MoMa",
     page_icon="🌐",
 )
+
+with st.spinner("Loading..."):
+    import streamlit.components.v1 as components
+    from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
+    from countries.countries_plot import countries_fig
 
 st.title("Spaces 🌐")
 
@@ -161,6 +162,7 @@ matches = collabs.query(
 
 # don't think this should appear given the way streamlit options work?
 # but leaving here for now in case
+
 if len(matches) == 0:
     st.info(
         f"""
@@ -229,5 +231,6 @@ else:
         artists = random_artwork["Artist"].tolist()[0]
         with st.columns(3)[1]:
             url = random_artwork["ThumbnailURL"].tolist()[0]
-            st.image(url)
-            st.caption(f"_{title}_ by {artists}")
+            with st.spinner("Loading..."):    
+                st.image(url)
+                st.caption(f"_{title}_ by {artists}")

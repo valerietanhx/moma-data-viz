@@ -25,8 +25,5 @@ st.markdown(
     """
 )
 
-with st.sidebar:
-    st.markdown("""
-    
 
-    """)
+    
