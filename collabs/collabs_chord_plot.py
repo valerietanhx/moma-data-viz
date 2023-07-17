@@ -52,8 +52,8 @@ def rotate_label(plot, element):
 
 
 chord.opts(
-    cmap="Category20",
-    edge_cmap="Category20",
+    cmap="Set3",
+    edge_cmap="Set3",
     edge_color="source",
     labels="Nationality",
     node_color="Nationality",
