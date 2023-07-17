@@ -8,6 +8,11 @@ st.set_page_config(
     page_icon="🌐",
 )
 
+with st.sidebar:
+    st.caption(
+        "Source code on [GitHub](https://github.com/valerietanhx/moma-data-viz/)."
+    )
+
 with st.spinner("Loading..."):
     import streamlit.components.v1 as components
 

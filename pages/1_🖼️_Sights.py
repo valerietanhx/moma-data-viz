@@ -5,6 +5,12 @@ st.set_page_config(
     page_title="Sights | The Sights and Spaces of MoMa",
     page_icon="🖼️",
 )
+
+with st.sidebar:
+    st.caption(
+        "Source code on [GitHub](https://github.com/valerietanhx/moma-data-viz/)."
+    )
+
 with st.spinner("Loading..."):
     from colours.colour_plot_all import fig as colour_fig_all
     from colours.colour_plot_department import fig as colour_fig_department
