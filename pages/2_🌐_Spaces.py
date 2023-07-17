@@ -14,6 +14,16 @@ st.set_page_config(
 
 st.title("Spaces 🌐")
 
+# css to hide row indices of table
+hide_table_row_index = """
+    <style>
+    thead tr th:first-child {display:none}
+    tbody th {display:none}
+    </style>
+    """
+# inject css with markdown
+st.markdown(hide_table_row_index, unsafe_allow_html=True)
+
 st.plotly_chart(countries_fig, theme=None)
 
 st.markdown(
@@ -27,8 +37,17 @@ st.markdown(
     Western world, while few African or Asian artists appear in MoMa's art collection,
     suggesting that the collection may not be fully representative of the global
     modern art landscape.
+
+    What about the _least_ represented countries? Here are the artists solo-representing
+    the countries they come from!
     """
 )
+
+solo_representations = pd.read_csv("countries/SoloRepresentationsEnhanced.csv")
+solo_representations = solo_representations[["DisplayName", "Nationality", "URL"]]
+solo_representations = solo_representations.rename(columns={"DisplayName": "Name"})
+
+st.table(solo_representations)
 
 st.markdown(
     """
@@ -135,16 +154,36 @@ if len(matches) == 0:
         """
     )
 else:
+    num_collabs = len(matches)
+    num_times = ""
+    if num_collabs == 1:
+        num_times = "once"
+    elif num_collabs == 2:
+        num_times = "twice"
+    elif 3 <= num_collabs <= 9:
+        NUMBERS_DICT = {
+            3: "three",
+            4: "four",
+            5: "five",
+            6: "six",
+            7: "seven",
+            8: "eight",
+            9: "nine",
+        }
+        num_times = NUMBERS_DICT[num_collabs] + " times"
+    else:
+        num_times = str(num_collabs) + " times"
+
     matches_with_thumbnails = matches.dropna(subset=["ThumbnailURL"])
     if len(matches_with_thumbnails) == 0:
         st.write(
             f"""
             {first_nationality} and {second_nationality} artists have collaborated
-            {len(matches)} time(s), but we don't have images for their works!
+            {num_times}, but we don't have images for their works!
             Here are some of their artwork titles instead:
             """
         )
-        filtered = matches.filter(["Title", "Artist", "Nationality"], axis=1)
+        filtered = matches.filter(["Title", "Artist", "Nationality", "URL"], axis=1)
         filtered = filtered.rename(
             {"Artist": "Artists", "Nationality": "Nationalities"}, axis=1
         )
@@ -155,15 +194,7 @@ else:
             )
         )
 
-        # css to hide row indices of table
-        hide_table_row_index = """
-            <style>
-            thead tr th:first-child {display:none}
-            tbody th {display:none}
-            </style>
-            """
-        # inject css with markdown
-        st.markdown(hide_table_row_index, unsafe_allow_html=True)
+        filtered["URL"] = filtered["URL"].fillna("[Not available]")
 
         # display dataframe
         if len(filtered) <= 5:
@@ -174,7 +205,7 @@ else:
         st.write(
             f"""
             {first_nationality} and {second_nationality} artists have collaborated
-            {len(matches)} time(s)!
+            {num_times}!
             Here's a random artwork born from one of their collaborations:
             """
         )
