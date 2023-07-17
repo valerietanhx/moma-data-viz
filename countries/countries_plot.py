@@ -25,7 +25,7 @@ countries_fig.add_choropleth(
     locationmode="ISO-3",
     z=usa["Count"],
     showlegend=False,
-    colorscale=["#371263", "#371263"],
+    colorscale=["#29005e", "#29005e"],
     showscale= False,
     hovertemplate="""<b>USA</b><br><br>Count=%{z}<extra></extra>"""
 )
