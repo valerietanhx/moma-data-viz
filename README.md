@@ -1,5 +1,7 @@
 # The Sights and Spaces of MoMa
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://the-sights-and-spaces-of-moma.streamlit.app/)
+
 An analysis of the Museum of Modern Art (MoMa)'s art collection.
 
 ## Motivation
