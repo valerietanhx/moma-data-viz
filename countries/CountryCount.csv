@@ -1,114 +1,114 @@
-country,count,iso3_codes
-Afghanistan,1,AFG
-Albania,3,ALB
-Algeria,3,DZA
-United States,5191,USA
-Argentina,142,ARG
-Australia,55,AUS
-Austria,239,AUT
-Azerbaijan,2,AZE
-The Bahamas,1,BHS
-Bangladesh,1,BGD
-Belgium,96,BEL
-Benin,1,BEN
-Bolivia,3,BOL
-Bosnia And Herzegovina,6,BIH
-Brazil,167,BRA
-United Kingdom,860,GBR
-Bulgaria,5,BGR
-Burkina Fasoa,1,BFA
-Cambodia,1,KHM
-Cameroon,2,CMR
-Canada,192,CAN
-Chile,70,CHL
-China,101,CHN
-Colombia,54,COL
-Republic Of The Congo,6,COG
-Costa Rica,2,CRI
-Croatia,34,HRV
-Cuba,64,CUB
-Cyprus,1,CYP
-Czech Republic,78,CZE
-Czechoslovakia,5,CZE
-Denmark,121,DNK
-Netherlands,274,NLD
-Ecuador,4,ECU
-Egypt,12,EGY
-United Arab Emirates,2,ARE
-Estonia,3,EST
-Ethiopia,2,ETH
-Philippines,3,PHL
-Finland,62,FIN
-France,847,FRA
-Georgia,6,GEO
-Germany,965,DEU
-Ghana,3,GHA
-Greece,11,GRC
-Guatemala,7,GTM
-Haiti,17,HTI
-Hungary,53,HUN
-Iceland,12,ISL
-India,39,IND
-Iran,11,IRN
-Iraq,2,IRQ
-Ireland,24,IRL
-Israel,75,ISR
-Italy,536,ITA
-Ivory Coast,1,CIV
-Japan,507,JPN
-Kenya,1,KEN
-Kuwait,1,KWT
-Kyrgyzstan,2,KGZ
-Latvia,3,LVA
-Lebanon,9,LBN
-Lithuania,3,LTU
-Luxembourg,3,LUX
-Macedonia,4,MKD
-Malaysia,2,MYS
-Mali,3,MLI
-Mexico,135,MEX
-Mexico,135,MEX
-Morocco,6,MAR
-Mozambique,1,MOZ
-Namibia,2,NAM
-New Zealand,16,NZL
-Nicaragua,2,NIC
-Nigeria,6,NGA
-Norway,49,NOR
-Pakistan,4,PAK
-Palestine,4,PSE
-Panama,2,PAN
-Paraguay,2,PRY
-Persia,1,IRN
-Peru,39,PER
-Poland,131,POL
-Portugal,10,PRT
-Puerto Rico,7,PRI
-Romania,19,ROU
-Russia,262,RUS
-Western Sahara,1,ESH
-El Salvador,2,SLV
-Senegal,2,SEN
-Serbia,17,SRB
-Sierra Leone,1,SLE
-Singapore,2,SGP
-Slovakia,8,SVK
-Slovenia,17,SVN
-South Africa,67,ZAF
-South Korea,31,KOR
-Spain,158,ESP
-Sudan,2,SDN
-Sweden,128,SWE
-Switzerland,297,CHE
-Taiwan,5,TWN
-Tanzania,1,TZA
-Thailand,2,THA
-Tunisia,2,TUN
-Turkey,20,TUR
-Uganda,1,UGA
-United Kingdom,23,GBR
-Ukraine,13,UKR
-Uruguay,23,URY
-Venezuela,62,VEN
-Vietnam,5,VNM
-Zimbabwe,5,ZWE
+Nationality,count,demonym,country,iso3_codes
+Afghan,1,Afghan,Afghanistan,AFG
+Albanian,3,Albanian,Albania,ALB
+Algerian,3,Algerian,Algeria,DZA
+American,5191,American,United States,USA
+Argentine,142,Argentine,Argentina,ARG
+Australian,55,Australian,Australia,AUS
+Austrian,239,Austrian,Austria,AUT
+Azerbaijani,2,Azerbaijani,Azerbaijan,AZE
+Bahamian,1,Bahamian,The Bahamas,BHS
+Bangladeshi,1,Bangladeshi,Bangladesh,BGD
+Belgian,96,Belgian,Belgium,BEL
+Beninois,1,Beninois,Benin,BEN
+Bolivian,3,Bolivian,Bolivia,BOL
+Bosnian,6,Bosnian,Bosnia And Herzegovina,BIH
+Brazilian,167,Brazilian,Brazil,BRA
+British,860,British,United Kingdom,GBR
+Bulgarian,5,Bulgarian,Bulgaria,BGR
+Burkinabé,1,Burkinabé,Burkina Fasoa,BFA
+Cambodian,1,Cambodian,Cambodia,KHM
+Cameroonian,2,Cameroonian,Cameroon,CMR
+Canadian,192,Canadian,Canada,CAN
+Chilean,70,Chilean,Chile,CHL
+Chinese,101,Chinese,China,CHN
+Colombian,54,Colombian,Colombia,COL
+Congolese,6,Congolese,Republic Of The Congo,COG
+Costa Rican,2,Costa Rican,Costa Rica,CRI
+Croatian,34,Croatian,Croatia,HRV
+Cuban,64,Cuban,Cuba,CUB
+Cypriot,1,Cypriot,Cyprus,CYP
+Czech,78,Czech,Czech Republic,CZE
+Czechoslovakian,5,Czechoslovakian,Czechoslovakia,CZE
+Danish,121,Danish,Denmark,DNK
+Dutch,274,Dutch,Netherlands,NLD
+Ecuadorian,4,Ecuadorian,Ecuador,ECU
+Egyptian,12,Egyptian,Egypt,EGY
+Emirati,2,Emirati,United Arab Emirates,ARE
+Estonian,3,Estonian,Estonia,EST
+Ethiopian,2,Ethiopian,Ethiopia,ETH
+Filipino,3,Filipino,Philippines,PHL
+Finnish,62,Finnish,Finland,FIN
+French,847,French,France,FRA
+Georgian,6,Georgian,Georgia,GEO
+German,965,German,Germany,DEU
+Ghanaian,3,Ghanaian,Ghana,GHA
+Greek,11,Greek,Greece,GRC
+Guatemalan,7,Guatemalan,Guatemala,GTM
+Haitian,17,Haitian,Haiti,HTI
+Hungarian,53,Hungarian,Hungary,HUN
+Icelandic,12,Icelandic,Iceland,ISL
+Indian,39,Indian,India,IND
+Iranian,11,Iranian,Iran,IRN
+Iraqi,2,Iraqi,Iraq,IRQ
+Irish,24,Irish,Ireland,IRL
+Israeli,75,Israeli,Israel,ISR
+Italian,536,Italian,Italy,ITA
+Ivorian,1,Ivorian,Ivory Coast,CIV
+Japanese,507,Japanese,Japan,JPN
+Kenyan,1,Kenyan,Kenya,KEN
+Kuwaiti,1,Kuwaiti,Kuwait,KWT
+Kyrgyz,2,Kyrgyz,Kyrgyzstan,KGZ
+Latvian,3,Latvian,Latvia,LVA
+Lebanese,9,Lebanese,Lebanon,LBN
+Lithuanian,3,Lithuanian,Lithuania,LTU
+Luxembourger,3,Luxembourger,Luxembourg,LUX
+Macedonian,4,Macedonian,Macedonia,MKD
+Malaysian,2,Malaysian,Malaysia,MYS
+Malian,3,Malian,Mali,MLI
+Mexican,135,Mexican,Mexico,MEX
+Mexican,135,Mexican,Mexico,MEX
+Moroccan,6,Moroccan,Morocco,MAR
+Mozambican,1,Mozambican,Mozambique,MOZ
+Namibian,2,Namibian,Namibia,NAM
+New Zealander,16,New Zealander,New Zealand,NZL
+Nicaraguan,2,Nicaraguan,Nicaragua,NIC
+Nigerian,6,Nigerian,Nigeria,NGA
+Norwegian,49,Norwegian,Norway,NOR
+Pakistani,4,Pakistani,Pakistan,PAK
+Palestinian,4,Palestinian,Palestine,PSE
+Panamanian,2,Panamanian,Panama,PAN
+Paraguayan,2,Paraguayan,Paraguay,PRY
+Persian,1,Persian,Persia,IRN
+Peruvian,39,Peruvian,Peru,PER
+Polish,131,Polish,Poland,POL
+Portuguese,10,Portuguese,Portugal,PRT
+Puerto Rican,7,Puerto Rican,Puerto Rico,PRI
+Romanian,19,Romanian,Romania,ROU
+Russian,262,Russian,Russia,RUS
+Sahrawi,1,Sahrawi,Western Sahara,ESH
+Salvadoran,2,Salvadoran,El Salvador,SLV
+Senegalese,2,Senegalese,Senegal,SEN
+Serbian,17,Serbian,Serbia,SRB
+Sierra Leonean,1,Sierra Leonean,Sierra Leone,SLE
+Singaporean,2,Singaporean,Singapore,SGP
+Slovak,8,Slovak,Slovakia,SVK
+Slovenian,17,Slovenian,Slovenia,SVN
+South African,67,South African,South Africa,ZAF
+South Korean,31,South Korean,South Korea,KOR
+Spanish,158,Spanish,Spain,ESP
+Sudanese,2,Sudanese,Sudan,SDN
+Swedish,128,Swedish,Sweden,SWE
+Swiss,297,Swiss,Switzerland,CHE
+Taiwanese,5,Taiwanese,Taiwan,TWN
+Tanzanian,1,Tanzanian,Tanzania,TZA
+Thai,2,Thai,Thailand,THA
+Tunisian,2,Tunisian,Tunisia,TUN
+Turkish,20,Turkish,Turkey,TUR
+Ugandan,1,Ugandan,Uganda,UGA
+Uk,23,Uk,United Kingdom,GBR
+Ukrainian,13,Ukrainian,Ukraine,UKR
+Uruguayan,23,Uruguayan,Uruguay,URY
+Venezuelan,62,Venezuelan,Venezuela,VEN
+Vietnamese,5,Vietnamese,Vietnam,VNM
+Zimbabwean,5,Zimbabwean,Zimbabwe,ZWE

@@ -16,13 +16,15 @@ st.subheader("Overview")
 
 st.markdown(
     """We begin this theme with an overview of the art collection, revealing patterns
-    in the artwork's formal qualities that might not be immediately apparent.
-    A proportion of art pieces are shown on the scatterplot below, capturing how
-    similar or dissimilar pieces are to one another.
 
-    Hover around the graph to view details on each individual piece of artwork.
-    Click the icons on the panel on the right to view specific categories.
-    Clicking once will select/unselect a specific category, while double-clicking selecti
+    in the artworks' formal qualities that might not be immediately apparent.
+    A random sample of artworks is shown on the scatterplot below, capturing how
+    visually similar or dissimilar artworks are to one another.
+    
+    Hover around the graph to view details of each individual artwork, including
+    the link to their individual page on the MoMa website.
+    Click a category in the panel on the right to only view artworks that fall under
+    that specific category, and double-click to unselect.
     """
 )
 
@@ -142,7 +144,8 @@ st.markdown(
     """
     On the other end of the spectrum is orange, with only 67 artworks featuring it
     as one of their six dominant colours. (It's likely that more artworks actually
-    feature orange, but a shade more similar to brown, and thus read as such.)
+    feature orange, but featured a shade more similar to brown, and which was thus
+    read as such.)
     
     Which artworks have orange in them?
 

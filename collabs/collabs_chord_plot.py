@@ -23,7 +23,11 @@ edge_indexes = (
 nodes = pd.read_csv("collabs/CollabsGraphNodes.csv")
 nodes = nodes.merge(edge_indexes, how="right", left_on="index", right_on="edge_index")
 nodes.drop("edge_index", axis=1, inplace=True)
-nodes = hv.Dataset(nodes, "index")
+
+nodes = nodes.rename(
+    columns={"index": "Index", "nationality": "Nationality"}
+)  # TODO: find a way to remove "index" (seems unlikely).....
+nodes = hv.Dataset(nodes, "Alphabetical order")
 
 chord = hv.Chord((edges, nodes))
 
@@ -57,8 +61,8 @@ chord.opts(
     cmap="Category20",
     edge_cmap="Category20",
     edge_color=dim("source").str(),
-    labels="nationality",
-    node_color=dim("index").str(),
+    labels="Nationality",
+    node_color=dim("Nationality").str(),
     hooks=[rotate_label],
 )
 
