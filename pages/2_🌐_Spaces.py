@@ -38,7 +38,7 @@ st.markdown(
     suggesting that the collection may not be fully representative of the global
     modern art landscape.
 
-    What about the _least_ represented countries? Here are the artists solo representing
+    What about the _least_ represented countries? Here are the artists solo-representing
     the countries they come from!
     """
 )
