@@ -7,6 +7,13 @@ st.set_page_config(
 
 st.title("The Sights and Spaces of MoMa 🏛️")
 
+st.text("") # line break
+
+st.image("home-image.jpg")
+st.caption(
+    "Photo by [Mick Haupt](https://unsplash.com/@rocinante_11) on [Unsplash](https://unsplash.com/)."
+)
+
 st.markdown(
     """
     The Museum of Modern Art (MoMa) houses one of the largest collections of modern art
@@ -23,9 +30,4 @@ st.markdown(
     also share our methodology, shedding light on our thought process behind the
     analysis.
     """
-)
-
-st.image("home-image.jpg")
-st.caption(
-    "Photo by [Mick Haupt](https://unsplash.com/@rocinante_11) on [Unsplash](https://unsplash.com/)."
 )

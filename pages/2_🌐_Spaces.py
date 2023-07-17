@@ -93,8 +93,8 @@ st.markdown(
     formed from international collaborations. We present here pairs of countries that
     have collaborated at least 20 times.
 
-    Click on a country's chords to highlight it and get a clearer view of its
-    international collaborations!
+    Hover over the edge closes to a country to highlight its chords and get a clearer
+    view of its international collaborations!
     """
 )
 

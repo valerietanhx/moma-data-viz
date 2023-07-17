@@ -5,7 +5,7 @@ st.set_page_config(
     page_title="Sights | The Sights and Spaces of MoMa",
     page_icon="🖼️",
 )
-with st.spinner("Loading..."):    
+with st.spinner("Loading..."):
     from colours.colour_plot_all import fig as colour_fig_all
     from colours.colour_plot_department import fig as colour_fig_department
     from overview.overview_plot import overview_plot
@@ -23,8 +23,8 @@ st.markdown(
     
     Hover around the graph to view details of each individual artwork, including
     the link to their individual page on the MoMa website.
-    Click a category in the panel on the right to only view artworks that fall under
-    that specific category, and double-click to unselect.
+    Double-click a category in the panel on the right to only view artworks that fall
+    under that specific category, and double-click to unselect.
     """
 )
 
@@ -34,11 +34,11 @@ with st.spinner("Loading..."):
 with st.expander("Methodology"):
     st.markdown(
         """
-        1. Each image is resized to size 3 x 224 x 224 and loaded with PyTorch,
+        1. Each image was resized to 3px x 224px x 224px and loaded with PyTorch,
         using an image DataLoader and custom Dataset class for memory-efficient loading.
-        2. We make use of ResNet152, a deep neural network used in image recognition.
-        This model is loaded and its final fully-connected layer is removed.
-        3. Images are fed into ResNet152 in batches of 64. The output of each image is
+        2. We made use of ResNet152, a deep neural network used in image recognition.
+        This model was loaded and its final fully-connected layer was removed.
+        3. Images were fed into ResNet152 in batches of 64. The output of each image was
         a vector of length 2048.
         4. Because some classification types are more common than others, we took a
         smaller sample of more common artforms to achieve a more even distribution.
@@ -94,7 +94,8 @@ with st.expander("Methodology"):
 st.markdown(
     """
     Most of the 83349 artworks (82301 of them, in fact—that's around 98.7%!) 
-    have grey as one of their six dominant colours. Here are some that don't!
+    have grey as one of their six dominant colours, contrary to what we might expect of
+    modern art. Here are some that don't!
 
     (Some of these artworks may still look like they have black or grey in them;
     our colour detection method sadly isn't perfect.)
