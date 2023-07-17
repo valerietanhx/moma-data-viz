@@ -7,7 +7,7 @@ st.set_page_config(
 
 with st.sidebar:
     st.caption(
-        "Source code on [GitHub](https://github.com/valerietanhx/moma-data-viz/)."
+        "Source code on 🖥️ [GitHub](https://github.com/valerietanhx/moma-data-viz/)."
     )
 
 st.title("The Sights and Spaces of MoMa 🏛️")
