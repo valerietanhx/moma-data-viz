@@ -9,28 +9,10 @@ from holoviews import dim
 hv.extension("bokeh")
 hv.output(size=200)
 
-
-edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
+edges = pd.read_csv("collabs/CollabsGraphEdgesV2.csv")
 edges = edges.query("`value` >= 20")  # avoid plot looking like a yarn ball
 
-edge_indexes = (
-    pd.concat([edges["source"], edges["target"]])
-    .drop_duplicates()
-    .to_frame(name="edge_index")
-)
-
-
-nodes = pd.read_csv("collabs/CollabsGraphNodes.csv")
-nodes = nodes.merge(edge_indexes, how="right", left_on="index", right_on="edge_index")
-nodes.drop("edge_index", axis=1, inplace=True)
-
-nodes = nodes.rename(
-    columns={"index": "Index", "nationality": "Nationality"}
-)  # TODO: find a way to remove "index" (seems unlikely).....
-nodes = hv.Dataset(nodes, "Alphabetical order")
-
-chord = hv.Chord((edges, nodes))
-
+chord = hv.Chord((edges))
 
 # https://stackoverflow.com/questions/65561927/inverted-label-text-half-turn-for-chord-diagram-on-holoviews-with-bokeh/65610161#65610161
 def rotate_label(plot, element):
@@ -56,13 +38,12 @@ def rotate_label(plot, element):
     angles[np.where((angles < -math.pi / 2) | (angles > math.pi / 2))] += math.pi
     plot.handles["text_1_glyph"].text_align = "center"
 
-
 chord.opts(
     cmap="Category20",
     edge_cmap="Category20",
     edge_color=dim("source").str(),
-    labels="Nationality",
-    node_color=dim("Nationality").str(),
+    labels="index",
+    node_color=dim("index").str(),
     hooks=[rotate_label],
 )
 
