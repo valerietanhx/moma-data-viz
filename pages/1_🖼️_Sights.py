@@ -21,7 +21,8 @@ st.markdown(
     similar or dissimilar pieces are to one another.
 
     Hover around the graph to view details on each individual piece of artwork.
-    Click/Double click the panel on the right to view only certain artpieces that fall under specific categories.
+    Click the icons on the panel on the right to view specific categories.
+    Clicking once will select/unselect a specific category, while double-clicking selecti
     """
 )
 
