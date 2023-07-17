@@ -42,6 +42,20 @@ st.markdown(
     the countries they come from!
     """
 )
+###
+with st.expander("Methodology"):
+    st.markdown(
+        """
+        1. We performed manual cleaning to obtain artist nationalities.
+        2. We then made use of [online resources](https://github.com/knowitall/chunkedextractor/blob/master/src/main/resources/edu/knowitall/chunkedextractor/demonyms.csv) 
+            to convert nationalities (e.g. Japanese) to countries of origin (e.g. Japan)
+        3. Using country-converter, we obtain country codes in ISO-3 format and create the plot.
+        
+        More details can be found on
+        🖥️ [Github](https://github.com/valerietanhx/moma-data-viz/tree/master/countries).
+        """
+    )
+
 
 solo_representations = pd.read_csv("countries/SoloRepresentationsEnhanced.csv")
 solo_representations = solo_representations[["DisplayName", "Nationality", "URL"]]
