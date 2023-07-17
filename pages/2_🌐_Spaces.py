@@ -32,7 +32,7 @@ with st.expander("Methodology"):
         """
         1. We performed manual cleaning to obtain artist nationalities.
         2. We then made use of Github user knowitall's [demonyms.csv](https://github.com/knowitall/chunkedextractor/blob/master/src/main/resources/edu/knowitall/chunkedextractor/demonyms.csv) 
-            to convert nationalities (e.g. Japanese) to countries of origin (e.g. Japan)
+            to convert nationalities to countries (e.g. from "Japanese" to "Japan").
         3. Using country-converter, we obtain country codes in ISO-3 format and create the plot.
         
         More details can be found on
