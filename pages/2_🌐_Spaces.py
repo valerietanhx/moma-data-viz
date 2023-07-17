@@ -10,6 +10,7 @@ st.set_page_config(
 
 with st.spinner("Loading..."):
     import streamlit.components.v1 as components
+
     from collabs.collabs_cdf_plot import fig_cdf as collabs_fig_cdf
     from countries.countries_plot import countries_fig
 
@@ -31,9 +32,13 @@ with st.expander("Methodology"):
     st.markdown(
         """
         1. We performed manual cleaning to obtain artist nationalities.
-        2. We then made use of Github user knowitall's [demonyms.csv](https://github.com/knowitall/chunkedextractor/blob/master/src/main/resources/edu/knowitall/chunkedextractor/demonyms.csv) 
-            to convert nationalities to countries (e.g. from "Japanese" to "Japan").
-        3. We then used the [country-converter](https://pypi.org/project/country-converter/) library to obtain country codes in ISO-3 format, which was necessary for us plot the choropleth.
+        2. We then made use of Github user knowitall's
+        [demonyms.csv](https://github.com/knowitall/chunkedextractor/blob/master/src/main/resources/edu/knowitall/chunkedextractor/demonyms.csv) 
+        to convert nationalities to countries (e.g. from "Japanese" to "Japan").
+        3. We then used the
+        [country-converter](https://pypi.org/project/country-converter/) library to
+        obtain country codes in ISO-3 format, which was necessary for us to plot the
+        choropleth.
         4. Plotly was used to create the choropleth.
         
         More details can be found on
@@ -64,7 +69,23 @@ solo_representations = pd.read_csv("countries/SoloRepresentationsEnhanced.csv")
 solo_representations = solo_representations[["DisplayName", "Nationality", "URL"]]
 solo_representations = solo_representations.rename(columns={"DisplayName": "Name"})
 
-st.table(solo_representations)
+# st.table(solo_representations)
+
+
+def make_clickable(link):
+    # target _blank to open new window
+    return (
+        f'<a target="_blank" href="{link}">{link}</a>'
+        if link != "[Not available]"
+        else link
+    )
+
+
+solo_representations["URL"] = solo_representations["URL"].apply(make_clickable)
+
+st.write(solo_representations.to_html(escape=False), unsafe_allow_html=True)
+
+st.text("")  # line break
 
 st.markdown(
     """
@@ -216,12 +237,16 @@ else:
         )
 
         filtered["URL"] = filtered["URL"].fillna("[Not available]")
+        filtered["URL"] = filtered["URL"].apply(make_clickable)
 
         # display dataframe
         if len(filtered) <= 5:
-            st.table(filtered)
+            # st.table(filtered)
+
+            st.write(filtered.to_html(escape=False), unsafe_allow_html=True)
+
         else:
-            st.table(filtered.sample(5))
+            st.write(filtered.sample(5).to_html(escape=False), unsafe_allow_html=True)
     else:
         st.write(
             f"""
@@ -235,6 +260,6 @@ else:
         artists = random_artwork["Artist"].tolist()[0]
         with st.columns(3)[1]:
             url = random_artwork["ThumbnailURL"].tolist()[0]
-            with st.spinner("Loading..."):    
+            with st.spinner("Loading..."):
                 st.image(url)
                 st.caption(f"_{title}_ by {artists}")
