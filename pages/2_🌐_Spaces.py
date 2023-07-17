@@ -181,10 +181,7 @@ matches = collabs.query(
     + f"`Nationality`.str.contains('{second_nationality}')"
 )
 
-# don't think this should appear given the way streamlit options work?
-# but leaving here for now in case
-
-if len(matches) == 0:
+if len(matches) == 0:  # this should never appear!
     st.info(
         f"""
         Sorry, we don't know of any collaborations between
@@ -247,8 +244,6 @@ else:
 
         # display dataframe
         if len(filtered) <= 5:
-            # st.table(filtered)
-
             st.write(filtered.to_html(escape=False), unsafe_allow_html=True)
 
         else:
