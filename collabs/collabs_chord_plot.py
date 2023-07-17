@@ -10,8 +10,20 @@ hv.output(size=200)
 
 edges = pd.read_csv("collabs/CollabsGraphEdges.csv")
 edges = edges.query("`value` >= 20")  # avoid plot looking like a yarn ball
+unique_nationalities_edges = pd.concat([edges["source"], edges["target"]]).unique()
 
-chord = hv.Chord((edges))
+selection = pd.read_csv("collabs/CollabsSelectionEdges.csv")
+selection = selection[
+    selection["source"].isin(unique_nationalities_edges)
+    & selection["target"].isin(unique_nationalities_edges)
+][["source", "value"]]
+nationality_freq = selection.groupby("source").sum().reset_index()
+nationality_freq = nationality_freq.rename(
+    columns={"source": "Nationality", "value": "Total Count"}
+)
+
+nationality_freq = hv.Dataset(nationality_freq, "Nationality")
+chord = hv.Chord((edges, nationality_freq))
 
 
 # https://stackoverflow.com/questions/65561927/inverted-label-text-half-turn-for-chord-diagram-on-holoviews-with-bokeh/65610161#65610161
@@ -43,8 +55,8 @@ chord.opts(
     cmap="Category20",
     edge_cmap="Category20",
     edge_color="source",
-    labels="index",
-    node_color="index",
+    labels="Nationality",
+    node_color="Nationality",
     hooks=[rotate_label],
 )
 
