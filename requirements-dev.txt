@@ -68,7 +68,7 @@ mistune==3.0.1
 mpmath==1.3.0
 multidict==6.0.4
 nbclassic==1.0.0
-nbclient==0.8.0
+nbclient==0.10.0
 nbconvert==7.6.0
 nbformat==5.9.0
 nest-asyncio==1.5.6
