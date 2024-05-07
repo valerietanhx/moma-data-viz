@@ -144,6 +144,6 @@ wcwidth==0.2.6
 webcolors==1.13
 webencodings==0.5.1
 websocket-client==1.6.1
-xyzservices==2023.5.0
+xyzservices==2024.4.0
 yarl==1.9.2
 zipp==3.15.0
